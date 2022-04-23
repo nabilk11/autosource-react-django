@@ -20,6 +20,6 @@ class Product(models.Model):
     images = models.ImageField(upload_to='images/', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    
+    # add additional fields later
     def __str__(self):
         return self.name
