@@ -1,6 +1,7 @@
 import React from 'react';
-import { Col, Row, Button } from 'react-bootstrap';
+import { Col, Row,  } from 'react-bootstrap';
 import sneakers from '../dummy_data';
+import Product from '../components/Product';
 
 function Home() {
   return (
@@ -8,13 +9,8 @@ function Home() {
         <h1>ALL NEW PRODUCTS!</h1>
         <Row>
             {sneakers.map(s => (
-                  <Col sm={12} md={6} lg={4} mb-2 >
-                    <h3>{s.name} <br />
-                    <small className='text-muted' >{s.category}</small></h3>
-                    <img width={'150px'} src={s.images} alt="" />
-                    <p>{s.description}</p>
-                    <p>Price:<strong> {s.price}</strong></p>
-                    <Button>Add to Cart</Button>
+                  <Col key={s.id} sm={12} md={6} lg={4} mb-2 aligncenter >
+                    <Product s={s} />
                   </Col>  
             ))}
         </Row>
