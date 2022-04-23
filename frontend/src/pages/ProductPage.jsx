@@ -29,7 +29,7 @@ useEffect(() => {
                     <h5 className='text-muted'>{sneaker.color}</h5>
                     <p style={{color: "crimson"}} ><strong>{sneaker.year}</strong></p>  
                     <p><strong>{sneaker.description}</strong></p>
-                    {sneaker.in_stock ? <Image width={"100px"} fluid src={"/images/instock.jpeg"} />
+                    {sneaker.inStock ? <Image width={"100px"} fluid src={"/images/instock.jpeg"} />
                     :<Image width={"100px"} fluid src={"/images/soldout.jpeg"}/>} 
                 </Col>
 
@@ -44,7 +44,7 @@ useEffect(() => {
                     <h3>Select Size & Add to Cart</h3>
 
                     <h4>{sneaker.price}</h4>
-                    <Button variant='primary' >Add to Cart</Button>   
+                    <Button variant='primary' type='button'>Add to Cart</Button>   
                 </Col>
             </Row>
         </Card>
