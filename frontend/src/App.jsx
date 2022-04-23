@@ -12,7 +12,9 @@ function App() {
       <NavHeader />
       <main className='py-4' >
         <Container>
-          <h1>SneakerSource | Welcome</h1> 
+          <div className="header mb-5">
+            <h1 className="heading">SneakerSource | Welcome</h1>
+          </div>
           <Home/>
         </Container>
       </main>
