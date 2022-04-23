@@ -20,8 +20,9 @@ function Product({s}) {
                     <Card.Text as={"h4"} >
                         Price:<strong> {s.price}</strong>
                     </Card.Text>
-                    
-                    <Button>Add to Cart</Button>
+                    <Link to={`/product/${s._id}`} style={{textDecoration: "none", color: 'inherit'}} >
+                        <Button>See More</Button>
+                    </Link>
                 </Card.Body>
             
         </Card>

@@ -9,17 +9,19 @@ const sneakers = [
         'category': 'Nike SB',
         'images': '/images/sbd_delasoul.webp',
         'price': '$1550.00',
+        'color': 'Safari/Baroque Brown-Altitude Green',
     },
     {
         '_id': '1',
         'year': '2014',
         'name': 'Air Jordan 11 Low Concord',
         'description': 'The 11th iteration of the Nike Air Jordan sneakers in a low profile and Concord colorway.',
-        'in_stock': true,
+        'in_stock': false,
         'created_at': new Date().toLocaleDateString(),
         'category': 'Jordan',
         'images': '/images/jordan11low.webp',
         'price': '$198.00',
+        'color': 'White/Black Concord',
 
     },
     {
@@ -32,18 +34,20 @@ const sneakers = [
         'category': 'Yeezy',
         'images': '/images/ye_moonrock.webp',
         'price': '$1220.00',
+        'color': 'Moonrock',
 
     },
     {
         '_id': '3',
         'year': '1996',
         'name': 'Nike Air Uptempo',
-        'description': "One of the premiere Nike Basketball sneakers of the 1990's, in a Sail/Sail/Team Orange/Black colorway.",
+        'description': "One of the premiere Nike Basketball sneakers of the 1990's. Special colorway.",
         'in_stock': true,
         'created_at': new Date().toLocaleDateString(),
         'category': 'Nike',
         'images': '/images/nike_uptempo.jpeg',
         'price': '$160.00',
+        'color': 'Sail/Sail/Team Orange/Black',
 
     },
     
