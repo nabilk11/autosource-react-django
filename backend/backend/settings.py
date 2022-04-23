@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'corsheaders', 
     'rest_framework',
     'rest_framework.authtoken',
+    #MAIN BACKEND API APP   
+    'api',
+
 
 ]
 
