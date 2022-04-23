@@ -4,21 +4,28 @@ import { Container, Navbar, Nav, Row, NavDropdown } from 'react-bootstrap';
 function NavHeader() {
   return (
     <header>
-       <Navbar bg="light" expand="lg">
+       <Navbar collapseOnSelect variant='dark' bg="dark" expand="lg">
         <Container>
-            <Navbar.Brand href="#home">SneakerSource</Navbar.Brand>
+            <Navbar.Brand href="/">SneakerSource</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#link">Link</Nav.Link>
-                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                </NavDropdown>
+            <Nav className="m-auto">
+                <Nav.Link href="/">Home</Nav.Link>
+                <Nav.Link href="/register">Register</Nav.Link>
+                <Nav.Link href="/login">Login</Nav.Link>
+                <strong>
+                  <NavDropdown renderMenuOnMount={true} title="Sneakers" id="basic-nav-dropdown"> 
+                  <NavDropdown.Item href="#jordan">Air Jordan</NavDropdown.Item>
+                  <NavDropdown.Item href="#NikeSB">Nike SB</NavDropdown.Item>
+                  <NavDropdown.Item href="#Nike">Nike</NavDropdown.Item>
+                  <NavDropdown.Item href="#Yeezy">Yeezy</NavDropdown.Item>
+                  <NavDropdown.Item href="#Other">Other</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#products">View All Products</NavDropdown.Item>
+                  </NavDropdown>
+                </strong>
+                <Nav.Link href="#Cart">View Cart</Nav.Link>
+                <Nav.Link href="#contact">Contact Us</Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
             </Container>

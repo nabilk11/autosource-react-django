@@ -13,5 +13,9 @@ code {
 }
 
 main {
-  min-height: 85vh;
+  min-height: 75vh;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
 }
