@@ -4,10 +4,12 @@ import { Link, useParams } from 'react-router-dom';
 import sneakers from '../dummy_data';
 
 function ProductPage() {
-
+// state hook for sneakers
 const [sneaker, setSneaker] = useState({});
+// useParams hook to obtain id
 const id = useParams().id;
 
+// useEffect hook to setSneaker
 useEffect(() => {
     const fetchSneaker = () => {
         const res = sneakers.find((s)=> 
@@ -29,12 +31,12 @@ useEffect(() => {
                     <h5 className='text-muted'>{sneaker.color}</h5>
                     <p style={{color: "crimson"}} ><strong>{sneaker.year}</strong></p>  
                     <p><strong>{sneaker.description}</strong></p>
-                    {sneaker.inStock ? <Image width={"100px"} fluid src={"/images/instock.jpeg"} />
+                    {sneaker.count > 0 ? <Image width={"100px"} fluid src={"/images/instock.jpeg"} />
                     :<Image width={"100px"} fluid src={"/images/soldout.jpeg"}/>} 
                 </Col>
 
                 <Col md={6}>
-                    <Image fluid src={sneaker.images}></Image>
+                    <Image fluid src={sneaker.images} />
                 </Col>
             </Row>
         </Card>
@@ -43,13 +45,11 @@ useEffect(() => {
                 <Col as={"div"} md={12} style={{textAlign: "center"}} >
                     <h3>Select Size & Add to Cart</h3>
 
-                    <h4>{sneaker.price}</h4>
-                    <Button variant='primary' type='button'>Add to Cart</Button>   
+                    <h4>$ {sneaker.price}.00</h4>
+                    <Button variant='primary' disabled={sneaker.count == 0} type='button'>Add to Cart</Button>   
                 </Col>
             </Row>
         </Card>
-        
-        
     </div>
   )
 }

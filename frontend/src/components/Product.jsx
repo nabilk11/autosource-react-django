@@ -18,7 +18,7 @@ function Product({s}) {
                         <p>{s.description}</p>
                     </Card.Text>
                     <Card.Text as={"h4"} >
-                        Price:<strong> {s.price}</strong>
+                        Price:<strong> ${(s.price).toFixed(2)}</strong>
                     </Card.Text>
                     <Link to={`/product/${s._id}`} style={{textDecoration: "none", color: 'inherit'}} >
                         <Button>See More</Button>
