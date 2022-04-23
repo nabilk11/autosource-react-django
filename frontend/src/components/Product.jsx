@@ -1,11 +1,12 @@
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function Product({s}) {
   return (
     <div>
         <Card className='my-3 py-3' >
-            <a href={"/product/${product.id"} style={{textDecoration: "none", color: 'inherit'}} >
+            <Link to={`/product/${s.id}`} style={{textDecoration: "none", color: 'inherit'}} >
                 <Card.Title ><strong>{s.name}</strong><br />
                     <small className='text-muted' >{s.category}</small>
                 </Card.Title>
@@ -21,7 +22,7 @@ function Product({s}) {
                     
                     <Button>Add to Cart</Button>
                 </Card.Body>
-            </a>
+            </Link>
         </Card>
     </div>
   )

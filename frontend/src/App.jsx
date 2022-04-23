@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import NavHeader from './components/NavHeader';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import ProductPage from './pages/ProductPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 
@@ -18,6 +19,7 @@ function App() {
         </div>
       <Routes>
         <Route path='/' exact element={<Home />}  />
+        <Route path='/product/:id' exact element={<ProductPage />}  />
       </Routes>
     </Container>
     </main>
