@@ -6,11 +6,12 @@ function Product({s}) {
   return (
     <div>
         <Card className='my-3 py-3' >
-            <Link to={`/product/${s.id}`} style={{textDecoration: "none", color: 'inherit'}} >
+            <Link to={`/product/${s._id}`} style={{textDecoration: "none", color: 'inherit'}} >
                 <Card.Title ><strong>{s.name}</strong><br />
                     <small className='text-muted' >{s.category}</small>
                 </Card.Title>
                 <Card.Img  src={s.images} alt="" />
+            </Link>
                 <Card.Body>
                     <p className='text-muted' >{s.year}</p>
                     <Card.Text as={"div"} height={"80px"}>
@@ -22,7 +23,7 @@ function Product({s}) {
                     
                     <Button>Add to Cart</Button>
                 </Card.Body>
-            </Link>
+            
         </Card>
     </div>
   )
