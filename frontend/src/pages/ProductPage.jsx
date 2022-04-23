@@ -27,7 +27,7 @@ useEffect(() => {
                 <Col md={6}>
                     <h2>{sneaker.name}</h2>
                     <h5 className='text-muted'>{sneaker.color}</h5>
-                    <p><strong>{sneaker.year}</strong></p>  
+                    <p style={{color: "crimson"}} ><strong>{sneaker.year}</strong></p>  
                     <p><strong>{sneaker.description}</strong></p>
                     {sneaker.in_stock ? <Image width={"100px"} fluid src={"/images/instock.jpeg"} />
                     :<Image width={"100px"} fluid src={"/images/soldout.jpeg"}/>} 
@@ -40,14 +40,11 @@ useEffect(() => {
         </Card>
         <Card>
             <Row>
-                <Col md={6}>
-                  
-                </Col>
-                <Col as={"div"} md={6}>
+                <Col as={"div"} md={12} style={{textAlign: "center"}} >
                     <h3>Select Size & Add to Cart</h3>
 
                     <h4>{sneaker.price}</h4>
-                    <Button>Add to Cart</Button>   
+                    <Button variant='primary' >Add to Cart</Button>   
                 </Col>
             </Row>
         </Card>
