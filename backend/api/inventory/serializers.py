@@ -5,7 +5,4 @@ from rest_framework import serializers
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Category
-        fields = {
-            'title', 'description'
-        }
         fields = '__all__'
