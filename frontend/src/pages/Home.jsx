@@ -5,8 +5,8 @@ import Product from '../components/Product';
 
 function Home() {
   return (
-    <div>
-        <h1>ALL NEW PRODUCTS!</h1>
+    <div >
+        <h2 className='mt-4' >The Latest Releases!</h2>
         <Row>
             {sneakers.map(s => (
                   <Col key={s.id} sm={12} md={6} lg={4} mb-2 aligncenter >
