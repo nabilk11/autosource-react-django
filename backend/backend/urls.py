@@ -18,14 +18,17 @@ from django.urls import path, include
 from rest_framework import routers
 from django.conf import settings
 from django.conf.urls.static import static
+from . import views
 
 
 router = routers.DefaultRouter()
 
 
 urlpatterns = [
+    path('', views.Dummy.as_view(), name='dummy_home'),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
+    path('api/', include('api.urls')),
 
 ]
 
