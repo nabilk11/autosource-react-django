@@ -5,17 +5,16 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Product, Category, OrderedProducts
 from .serializers import *
+from django.views.generic.detail import DetailView
+
 
 # Create your views here.
 
-###### DUMMY?TESTING 
+###### DUMMY/TESTING VIEWS ######
+#  
 # HOME PAGE VIEW
 def home(request):
     return JsonResponse({'title': 'SneakerSource App',  'info': 'React Django'})
-# Dummy Data View
-@api_view(['GET'])
-def products(request):
-    return Response(sneakers)
 
 # GET ALL PRODUCTS
 class GetAllProducts(APIView):
@@ -26,13 +25,11 @@ class GetAllProducts(APIView):
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
-# Dummy Data View
+# GET PRODUCT DETAILS
 @api_view(['GET'])
-def singleProduct(request, pk):
-    product = {''}
-    for i in sneakers:
-        if i['_id'] == pk:
-            product = i
-            break
-    return Response(product)
+def product_details(request, pk):
+    product = Product.objects.get(_id=pk)
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
+
 

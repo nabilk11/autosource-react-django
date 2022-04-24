@@ -10,6 +10,6 @@ urlpatterns = [
     # path('category/', include('api.inventory.urls')),
     path('products/', views.GetAllProducts.as_view(), name="products"),
     # this path must be string for dummy data
-    path('products/<str:pk>/', views.singleProduct, name="product_details"),
+    path('products/<str:pk>/', views.product_details, name="product_details"),
 
 ]
