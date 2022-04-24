@@ -4,14 +4,14 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 CAT_CHOICES = (
-    ("JO","Jordan"),
-    ("YE","Yeezy"),
-    ("SB","NikeSB"),
-    ("NK","Nike"),
-    ("Acc","Accessories"),
-    ("Oth","Other"),
-    ("Men's","Men's Apparel"),
-    ("Wom's","Women's Apparel"),
+    ("Jordan","Jordan"),
+    ("Yeezy","Yeezy"),
+    ("NikeSB","NikeSB"),
+    ("Nike","Nike"),
+    ("Accessories","Accessories"),
+    ("Other","Other"),
+    ("Men's Apparel","Men's Apparel"),
+    ("Women's Apparel","Women's Apparel"),
 )
 
 # Category Model
@@ -21,7 +21,7 @@ class Category(models.Model):
     createdAt = models.DateTimeField(auto_now_add=True)
 
 def __str__(self):
-        return self.title
+    return self.title
 
 class Meta:
     ordering = ['title']

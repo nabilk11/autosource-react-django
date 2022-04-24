@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     #MAIN BACKEND API APP   
     'api',
     #INNER APPS
-    'api.inventory',
+    
 
 
 ]
