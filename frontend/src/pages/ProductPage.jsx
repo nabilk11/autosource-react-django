@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Row, Image } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
@@ -11,11 +12,12 @@ const id = useParams().id;
 
 // useEffect hook to setSneaker
 useEffect(() => {
-    const fetchSneaker = () => {
-        const res = sneakers.find((s)=> 
-            s._id === id
-        )
-        setSneaker(res)
+    const fetchSneaker = async () => {
+        const res = await axios.get('/api/products/'+id)
+        // sneakers.find((s)=> 
+        //     s._id === id
+        // )
+        setSneaker(res.data)
     }
     fetchSneaker();
 }, [id])
