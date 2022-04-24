@@ -10,9 +10,9 @@ function Home() {
 
   useEffect(()=> {
     const fetchProducts = async () => {
-    const res = await axios.get('http://127.0.0.1:8000/api/products/')
+    const res = await axios.get('/api/products/')
     setProducts(res.data)
-    console.log(res)
+    // console.log(res)
     }
     fetchProducts()
   },[])
@@ -24,7 +24,7 @@ function Home() {
         <small className='text-muted mb-3' >Are Here at SneakerSource!</small> </h2>
         <Row>
             {products.map(s => (
-                  <Col key={s._id} sm={12} md={6} lg={4} mb-2 aligncenter >
+                  <Col key={s._id} sm={12} md={6} lg={4} >
                     <Product s={s} />
                   </Col>  
             ))}
