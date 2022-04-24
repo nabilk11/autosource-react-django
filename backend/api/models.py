@@ -41,6 +41,7 @@ class Product(models.Model):
     images = models.ImageField(upload_to='images/', blank=True, null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     
+    
     # add additional fields later
     def __str__(self):
         return self.name
