@@ -13,7 +13,7 @@ const id = useParams().id;
 useEffect(() => {
     const fetchSneaker = () => {
         const res = sneakers.find((s)=> 
-            s._id == id
+            s._id === id
         )
         setSneaker(res)
     }
@@ -46,7 +46,7 @@ useEffect(() => {
                     <h3>Select Size & Add to Cart</h3>
 
                     <h4>$ {sneaker.price}.00</h4>
-                    <Button variant='primary' disabled={sneaker.count == 0} type='button'>Add to Cart</Button>   
+                    <Button variant='primary' disabled={sneaker.count === 0} type='button'>Add to Cart</Button>   
                 </Col>
             </Row>
         </Card>

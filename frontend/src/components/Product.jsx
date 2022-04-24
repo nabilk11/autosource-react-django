@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function Product({s}) {
   return (
     <div>
-        <Card className='my-3 py-3' >
+        <Card className='my-3 py-3' variant='fluid' >
             <Link to={`/product/${s._id}`} style={{textDecoration: "none", color: 'inherit'}} >
                 <Card.Title ><strong>{s.name}</strong><br />
                     <small className='text-muted' >{s.category}</small>
