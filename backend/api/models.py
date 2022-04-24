@@ -47,3 +47,28 @@ class Product(models.Model):
     class Meta:
         ordering = ['name']
 
+# Order Model
+class Order(models.Model):
+    _id = models.AutoField(primary_key=True, editable=False)
+    paymentType = models.CharField(max_length=200, null=True, blank=True)
+    tax = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    shipping = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    totalPrice = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    paymentCompleted = models.BooleanField(default=False)
+    paymentTime = models.DateTimeField(auto_now_add=False, null=True, blank=True)
+    deliveryTime = models.BooleanField(default=False)
+    delivered = models.BooleanField(default=False)
+    createdAt = models.DateTimeField(auto_now_add=False, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    
+
+    def __str__(self):
+        return 'Order # ' + str(self._id)
+
+    class Meta:
+        ordering = ['delivered']
+
+       
+
+
+
