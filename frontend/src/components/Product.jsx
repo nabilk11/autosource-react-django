@@ -2,6 +2,11 @@ import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+// NOTES
+// fix category with conditional
+
+
+
 function Product({s}) {
   return (
     <div>
@@ -18,7 +23,7 @@ function Product({s}) {
                         <p>{s.description}</p>
                     </Card.Text>
                     <Card.Text as={"h4"} >
-                        Price:<strong> ${(s.price).toFixed(2)}</strong>
+                       <p>Price: <strong>${s.price}</strong></p>
                     </Card.Text>
                     <Link to={`/product/${s._id}`} style={{textDecoration: "none", color: 'inherit'}} >
                         <Button>See More</Button>

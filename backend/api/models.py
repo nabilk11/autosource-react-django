@@ -1,8 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
+from django.core.validators import MaxValueValidator, MinValueValidator
+
 
 # Create your models here.
+
+
+# Category Model
 
 CAT_CHOICES = (
     ("Jordan","Jordan"),
@@ -15,7 +20,6 @@ CAT_CHOICES = (
     ("Women's Apparel","Women's Apparel"),
 )
 
-# Category Model
 class Category(models.Model):
     title = models.CharField(max_length=55, choices = CAT_CHOICES)
     description = models.TextField(max_length=255, null=True, blank=True)
@@ -29,6 +33,14 @@ class Category(models.Model):
 
 
 # Products Model
+def current_year():
+    return datetime.date.today().year
+
+
+def multi_year_value(year):
+    return MaxValueValidator(current_year())(year)
+
+
 class Product(models.Model):
     _id = models.AutoField(editable=False, primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
@@ -40,6 +52,9 @@ class Product(models.Model):
     count = models.IntegerField(default=0, blank=True, null=True)
     images = models.ImageField(upload_to='images/', blank=True, null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
+    year = models.PositiveIntegerField(default=current_year(), validators=[MinValueValidator(1984), multi_year_value])
+
+    
     
     # add additional fields later
     def __str__(self):
