@@ -21,7 +21,7 @@ const prodReducers = (state = {products:[] }, action) => {
         case PRODUCT_ERROR:
             return { 
                 loading: false, 
-                error: action.payload,
+                err: action.payload,
              }
 
         default:
