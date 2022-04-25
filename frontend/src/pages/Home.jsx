@@ -1,20 +1,24 @@
 import { React, useState, useEffect } from 'react';
 import { Col, Row,  } from 'react-bootstrap';
-import sneakers from '../dummy_data';
+import { useDispatch, useSelector } from 'react-redux';
 import Product from '../components/Product';
 import axios from 'axios';
+import { allProducts } from '../redux/actions/prodActions'
 
 function Home() {
   // state hook for all products
-  const [products, setProducts] = useState([])
+  // const [products, setProducts] = useState([])
+  // Access dispatch
+  const dispatch = useDispatch()
+  // 
+  const payload = useSelector(state => state.allProducts)
+  const { products } = payload
 
   useEffect(()=> {
-    const fetchProducts = async () => {
-    const res = await axios.get('/api/products/')
-    setProducts(res.data)
-    // console.log(res)
-    }
-    fetchProducts()
+    // const fetchProducts = async () => {
+    // const res = await axios.get('/api/products/')
+    dispatch(allProducts())
+    // fetchProducts()
   },[])
 
 

@@ -1,9 +1,11 @@
 import { PRODUCT_ERROR, 
     PRODUCT_START, 
     PRODUCT_SUCCESS } from "../reducers/prodReducer";
+import axios from 'axios';
 
 
-const allProducts = () => async (dispatch) => {
+
+export const allProducts = () => async (dispatch) => {
     try {
         dispatch({
             type: PRODUCT_START
