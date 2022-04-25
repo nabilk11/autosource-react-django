@@ -20,7 +20,7 @@ function App() {
         <Route path='/' exact element={<Home />}  />
         <Route path='/products' element={<AllProducts />}  />
         <Route path='/product/:id' element={<ProductPage />}  />
-        <Route path='/cart/:id?' element={<CartPage />}  />
+        <Route path='/cart/:id' element={<CartPage />}  />
         <Route path='/cart' element={<CartPage />}  />
       </Routes>
     </Container>

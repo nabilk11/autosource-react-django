@@ -19,13 +19,13 @@ export const cartReducer = (state = { cartProds:[] }, action) => {
                     cartProds:[...state.cartProds, (action.payload)]
                 }
             }
-        // case REMOVE_FROM_CART:
-        //     const exists = state.cartProds.find(c => c.product === (action.payload).product)
-        //     if (exists) {
+        case REMOVE_FROM_CART:
+            const exists = state.cartProds.find(c => c.product === (action.payload).product)
+            if (exists) {
 
-        //     } else {
+            } else {
                 
-        //     }
+            }
         default:
             return state
 
