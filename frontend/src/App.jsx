@@ -15,9 +15,6 @@ function App() {
   <NavHeader />
     <main className='py-4' >
     <Container>
-        <div className="header">
-          <h1 className="heading">SneakerSource | Welcome</h1>
-        </div>
       <Routes>
         <Route path='/' exact element={<Home />}  />
         <Route path='/products' exact element={<AllProducts />}  />
