@@ -2,9 +2,11 @@ import './App.css';
 import { Container } from 'react-bootstrap';
 import NavHeader from './components/NavHeader';
 import Footer from './components/Footer';
-import Home from './pages/Home';
+import AllProducts from './pages/AllProducts';
 import ProductPage from './pages/ProductPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Home } from './pages/Home';
+import { CartPage } from './pages/CartPage';
 
 
 
@@ -14,12 +16,12 @@ function App() {
   <NavHeader />
     <main className='py-4' >
     <Container>
-        <div className="header">
-          <h1 className="heading">SneakerSource | Welcome</h1>
-        </div>
       <Routes>
         <Route path='/' exact element={<Home />}  />
-        <Route path='/product/:id' exact element={<ProductPage />}  />
+        <Route path='/products' element={<AllProducts />}  />
+        <Route path='/product/:id' element={<ProductPage />}  />
+        <Route path='/cart/:id?' element={<CartPage />}  />
+        <Route path='/cart' element={<CartPage />}  />
       </Routes>
     </Container>
     </main>
