@@ -1,19 +1,28 @@
 // Convert Vars to Strings for Switch/Case
-export const PRODUCT_REQ = 'PRODUCT_REQ'
+export const PRODUCT_START = 'PRODUCT_START'
 export const PRODUCT_SUCCESS = 'PRODUCT_SUCCESS'
-export const PRODUCT_FAILURE = 'PRODUCT_FAILURE'
+export const PRODUCT_ERROR = 'PRODUCT_FAILURE'
 
 // Reducer for Products
 const prodReducers = (state = {products:[] }, action) => {
     switch (action.type) {
-        case PRODUCT_REQ:
-            return { loading: true, products: [] }
+        case PRODUCT_START:
+            return { 
+                loading: true, 
+                products: [], 
+            }
 
         case PRODUCT_SUCCESS:
-            return { loading: false, products: action.payload }
+            return { 
+                loading: false, 
+                products: action.payload,
+             }
 
-        case PRODUCT_FAILURE:
-            return { loading: false, error: action.payload }
+        case PRODUCT_ERROR:
+            return { 
+                loading: false, 
+                error: action.payload,
+             }
 
         default:
             return state
