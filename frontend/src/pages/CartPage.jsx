@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Image, ListGroupItem, Form, Button, Card, Alert, ListGroup } from "react-bootstrap";
-import { addToCart } from '../redux/actions/cartActions';
+import { addToCart, removeFromCart } from '../redux/actions/cartActions';
 
 export const CartPage = () => {
 // useParams hook to obtain id
@@ -29,7 +29,7 @@ useEffect(()=> {
 
 
 const removeProd = (id) => {
-
+  dispatch(removeFromCart(id))
 }
 
 const handleCheckout = () => {
