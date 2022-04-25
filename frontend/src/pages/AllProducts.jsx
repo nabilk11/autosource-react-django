@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Col, Image, Row,  } from 'react-bootstrap';
+import { Alert, Col, Image, Row,  } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Product from '../components/Product';
 import { allProducts } from '../redux/actions/prodActions'
@@ -35,7 +35,7 @@ function AllProducts() {
                   </Col>  
             ))}
         </Row> 
-        : <h1>{err.message}</h1>}
+        : <Alert>😥  😥  😥  {err.message} 😥  😥  😥 </Alert>}
         
     </div>
   )

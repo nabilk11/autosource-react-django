@@ -1,9 +1,17 @@
 // Convert Vars to Strings for Switch/Case
+// All Products
 export const PRODUCT_START = 'PRODUCT_START'
 export const PRODUCT_SUCCESS = 'PRODUCT_SUCCESS'
 export const PRODUCT_ERROR = 'PRODUCT_FAILURE'
 
-// Reducer for Products
+// Product Details
+// setup if time
+export const DETAIL_START = 'DETAIL_START'
+export const DETAIL_SUCCESS = 'DETAIL_SUCCESS'
+export const DETAIL_ERROR = 'DETAIL_FAILURE'
+/////////////////////////////////////////////////////////////////////
+
+// Reducer for All Products
 const prodReducers = (state = {products:[] }, action) => {
     switch (action.type) {
         case PRODUCT_START:
@@ -28,6 +36,9 @@ const prodReducers = (state = {products:[] }, action) => {
             return state
     } 
 }
+
+
+
 
 
 

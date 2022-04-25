@@ -6,6 +6,7 @@ import AllProducts from './pages/AllProducts';
 import ProductPage from './pages/ProductPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home';
+import { CartPage } from './pages/CartPage';
 
 
 
@@ -17,8 +18,10 @@ function App() {
     <Container>
       <Routes>
         <Route path='/' exact element={<Home />}  />
-        <Route path='/products' exact element={<AllProducts />}  />
-        <Route path='/product/:id' exact element={<ProductPage />}  />
+        <Route path='/products' element={<AllProducts />}  />
+        <Route path='/product/:id' element={<ProductPage />}  />
+        <Route path='/cart/:id?' element={<CartPage />}  />
+        <Route path='/cart' element={<CartPage />}  />
       </Routes>
     </Container>
     </main>
