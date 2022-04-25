@@ -2,7 +2,7 @@
 // All Products
 export const PRODUCT_START = 'PRODUCT_START'
 export const PRODUCT_SUCCESS = 'PRODUCT_SUCCESS'
-export const PRODUCT_ERROR = 'PRODUCT_FAILURE'
+export const PRODUCT_ERROR = 'PRODUCT_ERROR'
 
 // Product Details
 // setup if time
