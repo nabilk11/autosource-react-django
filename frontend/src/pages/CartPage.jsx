@@ -11,6 +11,8 @@ const cartProdId = useParams().id;
 const location = useLocation()
 // dispatch hook
 const dispatch = useDispatch()
+// useNavigate Hook
+const navigate = useNavigate()
 // find qty from params
 const qty = location.search ? Number(location.search.split('=')[1]) : 1 
 // useSelector hook to obtain new cart state
@@ -29,11 +31,16 @@ useEffect(()=> {
 const removeProd = (id) => {
 
 }
+
+const handleCheckout = () => {
+  navigate('/shipping')
+
+}
   return (
     <div>
         <h1>Shopping Cart</h1>
         <Row>
-          <Col md={12} >
+          <Col md={8} >
             {cartProds.length === 0 
             ? <Alert>
               Your Cart is Currently Empty!
@@ -53,14 +60,14 @@ const removeProd = (id) => {
                     $ {p.price}
                   </Col>
                   <Col md={2} >
-                  <Form.Control value={p.stock} as="select" onChange={(e)=> dispatch(addToCart(p.product, e.target.value))} >
+                  <Form.Control value={p.stock} as="select" onChange={(e)=> dispatch(addToCart(p.product, Number(e.target.value)))} >
                         {[...Array(p.count).keys()].map((p) => (
                             <option key={p+2} value={p+1} >{p+1}</option>
                         ))}
                     </Form.Control>
                   </Col>
                   <Col md={1} >
-                    <Button onClick={()=> removeProd(p.product) } >
+                    <Button variant='danger' onClick={()=> removeProd(p.product) } >
                           Remove
                     </Button>
                   </Col>
@@ -70,8 +77,15 @@ const removeProd = (id) => {
               ))}
               </Card>}
           </Col>
-          <Col>
-          
+          <Col md={4} >
+            <Card style={{textAlign: "center"}}>
+              <h2>{cartProds.reduce((acc, prod) => acc + prod.stock, 0)} Total Items </h2>
+              <h4>Subtotal: ${cartProds.reduce((acc, prod) => acc + prod.stock * prod.price, 0).toFixed(2)} </h4>
+              <Button variant='dark' className='btn-lg mt-4' disabled={cartProds.length === 0} onClick={handleCheckout}>
+              Checkout
+            </Button>
+            </Card>
+            
           </Col>
         </Row>
 
