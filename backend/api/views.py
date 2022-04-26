@@ -1,5 +1,3 @@
-import email
-from turtle import title
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.views import APIView
@@ -15,12 +13,6 @@ from rest_framework import status, permissions
 
 
 # Create your views here.
-
-###### DUMMY/TESTING VIEWS ######
-#  
-# HOME PAGE VIEW
-def home(request):
-    return JsonResponse({'title': 'SneakerSource App',  'info': 'React Django'})
 
 ##### REGISTER USER #####
 @api_view(['POST'])

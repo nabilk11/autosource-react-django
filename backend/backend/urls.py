@@ -34,7 +34,12 @@ urlpatterns = [
     # path('', views.Dummy.as_view(), name='dummy_home'),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/', include('api.urls')),
+    # path('api/', include('api.urls')),
+    # API Urls 
+    path('api/products/', include('api.urls.product_urls')),
+    path('api/users/', include('api.urls.users_urls')),
+    path('api/orders/', include('api.urls.orders_urls')),
+    path('api/category/', include('api.urls.category_urls')),
 
 ]
 
