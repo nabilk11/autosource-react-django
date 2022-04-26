@@ -19,13 +19,19 @@ from rest_framework import routers
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+)
+
+
 
 
 router = routers.DefaultRouter()
 
 
 urlpatterns = [
-    path('', views.Dummy.as_view(), name='dummy_home'),
+    path('api/user/login/', views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # path('', views.Dummy.as_view(), name='dummy_home'),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('api.urls')),

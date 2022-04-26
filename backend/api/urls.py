@@ -4,12 +4,14 @@ from . import views
 
 
 
-
 urlpatterns = [
     path('', views.home, name='home'),
+    path('user/register/', views.register, name='register'),
+    path('user/profile/', views.user_profile, name='profile'),
+    path('users/', views.get_users, name='all_users'),
     # path('category/', include('api.inventory.urls')),
     path('products/', views.GetAllProducts.as_view(), name="products"),
-    # this path must be string for dummy data
+    # this path must be string for _id
     path('products/<str:pk>/', views.product_details, name="product_details"),
 
 ]
