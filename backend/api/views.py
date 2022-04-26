@@ -1,11 +1,13 @@
 from django.http import JsonResponse
 from .dummy_data import sneakers
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .models import Product, Category, OrderedProducts
 from .serializers import *
-from django.views.generic.detail import DetailView
+from django.contrib.auth.models import User
+
 
 
 # Create your views here.
@@ -19,9 +21,18 @@ def home(request):
 ##### USER PROFILE VIEW #####
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def user_profile(request):
     user = request.user
     serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
+##### ALL USERS VIEW #####
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def get_users(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
 

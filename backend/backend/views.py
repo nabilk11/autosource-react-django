@@ -10,7 +10,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 #     def get(self, request):
 #         return HttpResponse('<h1>Backend Home Page</h1>')
 
-#######SIMPLE JWT TOKEN#######
+####### SIMPLE JWT TOKEN SERIALIZER X VIEW #######
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
