@@ -1,4 +1,5 @@
 import email
+from turtle import title
 from django.http import JsonResponse
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.views import APIView
@@ -60,6 +61,18 @@ def get_users(request):
 def get_categories(request):
     categories = Category.objects.all()
     serializer = CategorySerializer(categories, many=True)
+    return Response(serializer.data)
+
+# CREATE NEW CATEGORY
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
+def create_category(request):
+    data = request.data
+    new_cat = Category.objects.create(
+        title=data['title'],
+        description=data['description'],
+    )
+    serializer = CategorySerializer(new_cat, many=False)
     return Response(serializer.data)
 
 
