@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     #MAIN BACKEND API APP   
-    'api',
+    'api.apps.ApiConfig',
     #INNER APPS
     
 

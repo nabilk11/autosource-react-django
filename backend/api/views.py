@@ -8,6 +8,8 @@ from .models import Product, Category, OrderedProducts
 from .serializers import *
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
+from rest_framework import status, permissions
+
 
 
 
@@ -26,7 +28,7 @@ def register(request):
     user = User.objects.create(
         first_name=data['firstName'],
         last_name=data['lastName'],
-        username=data['username'],
+        username=data['email'],
         email=data['email'],
         password=make_password(data['password']),
     )
