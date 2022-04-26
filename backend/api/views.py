@@ -16,6 +16,16 @@ from django.views.generic.detail import DetailView
 def home(request):
     return JsonResponse({'title': 'SneakerSource App',  'info': 'React Django'})
 
+##### USER PROFILE VIEW #####
+
+@api_view(['GET'])
+def user_profile(request):
+    user = request.user
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
+
+
 # GET ALL PRODUCTS
 class GetAllProducts(APIView):
     model = Product
@@ -24,6 +34,7 @@ class GetAllProducts(APIView):
         products = Product.objects.all()
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
+
 
 # GET PRODUCT DETAILS
 @api_view(['GET'])
