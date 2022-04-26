@@ -2,7 +2,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from api.models import Product, Category, OrderedProducts
+from api.models import Category
 from api.serializers import *
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
