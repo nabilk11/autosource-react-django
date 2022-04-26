@@ -41,7 +41,7 @@ class Product(models.Model):
     images = models.ImageField(upload_to='images/', blank=True, null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     year = models.PositiveIntegerField(default=current_year(), validators=[MinValueValidator(1984), multi_year_value])
-    
+    size = models.CharField(max_length=22, null=True, blank=True)
     
     
     # add additional fields later

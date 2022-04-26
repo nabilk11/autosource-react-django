@@ -55,6 +55,15 @@ def get_users(request):
 
 
 
+# GET ALL CATEGORIES
+@api_view(['GET'])
+def get_categories(request):
+    categories = Category.objects.all()
+    serializer = CategorySerializer(categories, many=True)
+    return Response(serializer.data)
+
+
+
 # GET ALL PRODUCTS
 class GetAllProducts(APIView):
     model = Product
