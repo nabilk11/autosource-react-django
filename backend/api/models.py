@@ -8,20 +8,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 # Category Model
-
-CAT_CHOICES = (
-    ("Jordan","Jordan"),
-    ("Yeezy","Yeezy"),
-    ("NikeSB","NikeSB"),
-    ("Nike","Nike"),
-    ("Accessories","Accessories"),
-    ("Other","Other"),
-    ("Men's Apparel","Men's Apparel"),
-    ("Women's Apparel","Women's Apparel"),
-)
-
 class Category(models.Model):
-    title = models.CharField(max_length=55, choices = CAT_CHOICES)
+    title = models.CharField(max_length=55, null=False, blank=False)
     description = models.TextField(max_length=255, null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
 
@@ -47,13 +35,13 @@ class Product(models.Model):
     name = models.CharField(max_length=155, null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     color = models.CharField(max_length=155, blank=True, null=True)
-    category = models.ForeignKey(Category, related_name="category", null=True, blank=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey(Category, related_name="category", null=False, blank=False, on_delete=models.CASCADE, default=1)
     description = models.TextField(max_length=255, null=True, blank=True)
     count = models.IntegerField(default=0, blank=True, null=True)
     images = models.ImageField(upload_to='images/', blank=True, null=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     year = models.PositiveIntegerField(default=current_year(), validators=[MinValueValidator(1984), multi_year_value])
-
+    
     
     
     # add additional fields later
