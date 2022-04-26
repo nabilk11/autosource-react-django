@@ -14,4 +14,6 @@ urlpatterns = [
     # this path must be string for _id
     path('products/<str:pk>/', views.product_details, name="product_details"),
 
+    path('categories/', views.get_categories, name='categories'),
+    path('categories/new/', views.create_category, name='create_category'),
 ]
