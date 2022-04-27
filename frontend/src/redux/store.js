@@ -25,7 +25,8 @@ const initState = {
     cart: {
         cartProds: cartStored,
     },
-    login: {userToken: userTokenStored }
+    login: {userToken: userTokenStored },
+    // register: {userToken: userTokenStored},
 }
 // Store Middleware
 const middleware = [thunk]

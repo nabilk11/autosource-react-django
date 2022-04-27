@@ -50,12 +50,16 @@ export const registerCall = (firstName, lastName, email, password) => async (dis
         const headers = {'Content-Type': 'application/json'}
 
         const res = await axios.post('/api/users/register/', {
-            'first_name': firstName,'last_name': lastName, 'username': email, 'password': password,
+            'first_name': firstName,'last_name': lastName, 'email': email, 'password': password,
         },
         {headers: headers}
         )
         dispatch({
             type: REG_SUCCESS,
+            payload: res.data
+        })
+        dispatch({
+            type: LOGIN_SUCCESS,
             payload: res.data
         })
         localStorage.setItem('userToken', JSON.stringify(res.data.access))
