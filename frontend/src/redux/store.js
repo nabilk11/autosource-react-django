@@ -3,11 +3,13 @@ import { legacy_createStore as createStore, combineReducers, applyMiddleware } f
 import thunk from 'redux-thunk';
 import prodReducers from './reducers/prodReducer';
 import { cartReducer } from "./reducers/cartReducer";
+import { loginReducer } from "./reducers/userReducer";
 
 // Reducer
 const reducer = combineReducers({
     allProducts: prodReducers,
     cart: cartReducer,
+    login: loginReducer,
 })
 // Cart Data from Local Storage
 const cartStored = localStorage.getItem('cartProds') ? JSON.parse(localStorage.getItem('cartProds')) : []
