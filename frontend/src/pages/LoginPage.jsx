@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Form, Container, Button, Row, Card, Col  } from 'react-bootstrap';
 import { useDispatch, useSelector  } from 'react-redux';
 import { loginCall } from '../redux/actions/userActions';
@@ -9,10 +9,26 @@ export const LoginPage = () => {
 const email = useRef()
 const password = useRef()
 
+// redux
+const dispatch = useDispatch()
+const login = useSelector(state => state.login)
+const { loading, userToken, err } = login
 
+// useNavigate
+const navigate = useNavigate()
+
+useEffect(() => {
+  if(userToken) {
+    navigate("/")
+  } 
+}, [])
+
+console.log(userToken)
 // LOGIN HANDLER
 const handleLogin = (e) => {
   e.preventDefault()
+  dispatch(loginCall(email.current.value, password.current.value))
+
 
 }
 
