@@ -1,9 +1,22 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Navbar, Nav, Row, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 
 function NavHeader() {
+  // redux store
+const dispatch = useDispatch()
+const login = useSelector(state => state.login)
+const { userToken } = login
+
+
+//Logout
+const handleLogout = () => {
+  localStorage.removeItem('userToken')
+
+}
+
   return (
     <header>
        <Navbar collapseOnSelect variant='dark' bg="dark" expand="lg">
@@ -16,12 +29,6 @@ function NavHeader() {
             <Nav className="m-auto">
             <LinkContainer to={"/"}>
               <Nav.Link >Home</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to={"/register"}>
-              <Nav.Link >Register</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to={"/login"}>
-              <Nav.Link>Login</Nav.Link>
             </LinkContainer>
                 <strong>
                   <NavDropdown renderMenuOnMount={true} title="Sneakers" id="basic-nav-dropdown"> 
@@ -58,6 +65,20 @@ function NavHeader() {
                     <NavDropdown.Item>View All Products</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
+
+                {userToken ? <><LinkContainer to={"/profile"}>
+                    <Nav.Link >Profile</Nav.Link>
+                  </LinkContainer> 
+                  <Nav.Link onClick={handleLogout} >Logout</Nav.Link>
+                  </>
+                  : <><LinkContainer to={"/register"}>
+                  <Nav.Link >Register</Nav.Link>
+                </LinkContainer>
+                <LinkContainer to={"/login"}>
+                  <Nav.Link>Login</Nav.Link>
+                </LinkContainer> 
+                </>}
+                
                 <LinkContainer to={"/cart"}>
                   <Nav.Link>Cart</Nav.Link>
                 </LinkContainer>
