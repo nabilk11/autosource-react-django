@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Form, Container, Button, Row, Card, Col  } from 'react-bootstrap';
+import { Form, Container, Alert, Button, Row, Card, Col  } from 'react-bootstrap';
 import { useDispatch, useSelector  } from 'react-redux';
 import { loginCall } from '../redux/actions/userActions';
 
@@ -21,7 +21,7 @@ useEffect(() => {
   if(userToken) {
     navigate("/")
   } 
-}, [])
+}, [userToken])
 
 console.log(userToken)
 // LOGIN HANDLER
@@ -39,6 +39,7 @@ const handleLogin = (e) => {
         <Card  >
           <Card.Body>
         <Card.Title>Login to SneakerSource!</Card.Title>
+        {err && <Alert variant='danger'>{err.message}</Alert>}
         <Form onSubmit={handleLogin} >
           
             <Col md={6} >
