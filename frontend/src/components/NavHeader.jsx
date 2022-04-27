@@ -20,7 +20,7 @@ function NavHeader() {
             <LinkContainer to={"/register"}>
               <Nav.Link >Register</Nav.Link>
             </LinkContainer>
-            <LinkContainer to={"/register"}>
+            <LinkContainer to={"/login"}>
               <Nav.Link>Login</Nav.Link>
             </LinkContainer>
                 <strong>
