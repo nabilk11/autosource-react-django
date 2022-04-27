@@ -1,3 +1,4 @@
+from pyexpat import model
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -8,20 +9,25 @@ from django.contrib.auth.models import User
 from rest_framework import status, permissions
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+import datetime
 
 
 ####### SIMPLE JWT TOKEN SERIALIZER X VIEW #######
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-        # Add custom claims
-        token['name'] = user.name
-        token['email'] = user.email
-        token['firstName'] = user.first_name
-        token['lastName'] = user.last_name
-
-        return token
+    def validate(self, user):
+        data = super().validate(user)
+        refresh = self.get_token(self.user)
+        data['refresh'] = str(refresh)
+        data.pop('refresh', None) # remove refresh from the payload
+        data['access'] = str(refresh.access_token)
+        data['user'] = self.user.username
+        data['firstName'] = self.user.first_name
+        data['lastName'] = self.user.last_name
+        data['isAdmin'] = self.user.is_staff
+        data['super'] = self.user.is_superuser
+        data['id'] = self.user.id
+        data['date'] = datetime.date.today()
+        return data
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
