@@ -21,14 +21,14 @@ useEffect(() => {
   if(userToken) {
     navigate("/")
   } 
-}, [userToken])
+}, [userToken, navigate])
 
 console.log(userToken)
 // LOGIN HANDLER
 const handleLogin = (e) => {
   e.preventDefault()
   dispatch(loginCall(email.current.value, password.current.value))
-
+  // navigate("/")
 
 }
 

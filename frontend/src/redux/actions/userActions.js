@@ -29,8 +29,13 @@ export const loginCall = (email, password) => async (dispatch) => {
         dispatch({
         type: LOGIN_ERROR,
         payload: err, 
+    })   
+    }   
+}
+
+export const logout = () => (dispatch) => {
+    localStorage.removeItem('userToken')
+    dispatch({
+        type: LOGOUT
     })
-        
-    }
-    
 }
