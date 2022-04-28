@@ -77,7 +77,7 @@ export const registerCall = (name, email, password) => async (dispatch) => {
 }
 
 
-export const detailsCall = () => async (dispatch, getState) => {
+export const detailsCall = (id) => async (dispatch, getState) => {
 
     try {
         dispatch({
@@ -86,14 +86,14 @@ export const detailsCall = () => async (dispatch, getState) => {
 
         // getting token from redux state of logged in user
         const {
-            login: { userToken }
+            login: {userToken} 
         } = getState()
 
         // headers with Bearer Token
         const headers = {'Content-Type': 'application/json',
                         Authorization: `Bearer ${userToken.access}`}
 
-        const res = await axios.get('/api/users/profile/',
+        const res = await axios.get(`/api/users/${id}/`,
         {headers: headers}
         )
         dispatch({

@@ -9,6 +9,7 @@ import { Home } from './pages/Home';
 import { CartPage } from './pages/CartPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
+import { ProfilePage } from './pages/ProfilePage';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path='/' exact element={<Home />}  />
         <Route path='/login' element={<LoginPage />}  />
         <Route path='/register' element={<RegisterPage />}  />
+        <Route path='/profile' element={<ProfilePage />}  />
         <Route path='/products' element={<AllProducts />}  />
         <Route path='/product/:id' element={<ProductPage />}  />
         <Route path='/cart/:id' element={<CartPage />}  />

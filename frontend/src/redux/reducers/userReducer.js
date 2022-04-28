@@ -71,7 +71,7 @@ export const registerReducer = (state = { }, action) => {
 }
 
 // DETAILS REDUCER
-export const detailsReducer = (state = {user:{} }, action) => {
+export const detailsReducer = (state = { user :{ } }, action) => {
     switch (action.type) {
         case DETAILS_START:
             return {
@@ -82,7 +82,7 @@ export const detailsReducer = (state = {user:{} }, action) => {
         case DETAILS_SUCCESS:
             return { 
                 loading: false, 
-                userToken: action.payload,
+                user: action.payload,
              }
 
         case DETAILS_ERROR:
