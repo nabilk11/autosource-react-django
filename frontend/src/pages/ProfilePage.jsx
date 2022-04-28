@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Form, Container, Alert, Button, Row, Card, Col  } from 'react-bootstrap';
 import { useDispatch, useSelector  } from 'react-redux';
-import { detailsCall, loginCall } from '../redux/actions/userActions';
+import { detailsCall, updateCall } from '../redux/actions/userActions';
 
 
 export const ProfilePage = () => {
@@ -20,6 +20,9 @@ const { loading, user, err } = userDetails
 const login = useSelector(state => state.login)
 const { userToken } = login
 
+const userUpdate = useSelector(state => state.userUpdate)
+const { message } = userUpdate
+
 // useNavigate
 const navigate = useNavigate()
 
@@ -27,9 +30,7 @@ useEffect(() => {
     if(!userToken) {
         navigate("/login")
     } else {
-        
             dispatch(detailsCall('profile'))
-       
             setName(user.name)
             setEmail(user.email)
         
@@ -40,8 +41,13 @@ useEffect(() => {
     // LOGIN HANDLER
 const handleUpdate = (e) => {
         e.preventDefault()
-        // dispatch(loginCall(email.current.value, password.current.value))
-        // navigate("/")
+        dispatch(updateCall({
+            'id': user.id,
+            'name': name,
+            'email': email,
+            'password': password,
+}))
+        
   }
 
 
@@ -71,17 +77,17 @@ const handleUpdate = (e) => {
             <Col md={6} >
             <Row className='mb-3' >
             <Form.Label htmlFor='name' >Name</Form.Label>
-            <Form.Control type='name' value={name} onChange={(e)=> setName(e.target.value)}  >
+            <Form.Control type='name' placeholder={name} onChange={(e)=> setName(e.target.value)}  >
             </Form.Control>
             </Row>
             <Row className='mb-3' >
             <Form.Label htmlFor='email' >Email</Form.Label>
-            <Form.Control type='email' value={email} onChange={(e)=> setEmail(e.target.value)}  >
+            <Form.Control type='email' placeholder={email} onChange={(e)=> setEmail(e.target.value)}  >
             </Form.Control>
             </Row>
             <Row>
             <Form.Label htmlFor='password' >Password</Form.Label>
-            <Form.Control type='password' value={password} onChange={(e)=> setPassword(e.target.value)}  >
+            <Form.Control type='password' placeholder={password} onChange={(e)=> setPassword(e.target.value)}  >
             </Form.Control>
             </Row>
             {/* <Row>
@@ -102,7 +108,7 @@ const handleUpdate = (e) => {
         <Col>
 
         </Col>
-        
+
     </Container>
   )
 }
