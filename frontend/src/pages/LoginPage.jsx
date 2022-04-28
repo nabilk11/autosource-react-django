@@ -23,7 +23,7 @@ useEffect(() => {
   } 
 }, [userToken, navigate])
 
-
+console.log(userToken)
 // LOGIN HANDLER
 const handleLogin = (e) => {
   e.preventDefault()

@@ -10,18 +10,22 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 
+
 ####### SIMPLE JWT TOKEN SERIALIZER X VIEW #######
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    @classmethod
-    def get_token(cls, user):
-        token = super().get_token(user)
-        # Add custom claims
-        token['name'] = user.name
-        token['email'] = user.email
-        token['firstName'] = user.first_name
-        token['lastName'] = user.last_name
-
-        return token
+    def validate(self, user):
+        data = super().validate(user)
+        refresh = self.get_token(self.user)
+        data['refresh'] = str(refresh)
+        data.pop('refresh', None) # remove refresh from the payload
+        data['access'] = str(refresh.access_token)
+        data['username'] = self.user.username
+        data['email'] = self.user.email
+        data['name'] = self.user.first_name
+        data['isAdmin'] = self.user.is_staff
+        data['superuser'] = self.user.is_superuser
+        data['id'] = self.user.id
+        return data
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
@@ -32,13 +36,12 @@ class MyTokenObtainPairView(TokenObtainPairView):
 def register(request):
     data = request.data
     user = User.objects.create(
-        first_name=data['first_name'],
-        last_name=data['last_name'],
+        first_name=data['name'],
         username=data['email'],
         email=data['email'],
         password=make_password(data['password']),
     )
-    serializer = UserSerializer(user, many=False)
+    serializer = CustomUserTokenSerializer(user, many=False)
     return Response(serializer.data)
 
 
@@ -49,6 +52,23 @@ def user_profile(request):
     user = request.user
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
+
+##### UPDATE PROFILE VIEW #####
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def update_profile(request):
+    user = request.user
+    serializer = CustomUserTokenSerializer(user, many=False)
+    data = request.data
+    user.first_name = data['name']
+    user.username = data['email']
+    user.email = data['email']
+    if data['password'] != '':
+        user.password = make_password(data['password'])
+    user.save()
+    return Response(serializer.data)
+
+
 
 ##### ALL USERS VIEW #####
 @api_view(['GET'])
