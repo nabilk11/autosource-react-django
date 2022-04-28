@@ -1,4 +1,3 @@
-from pyexpat import model
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -20,13 +19,12 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         data['refresh'] = str(refresh)
         data.pop('refresh', None) # remove refresh from the payload
         data['access'] = str(refresh.access_token)
-        data['user'] = self.user.username
-        data['firstName'] = self.user.first_name
-        data['lastName'] = self.user.last_name
+        data['username'] = self.user.username
+        data['email'] = self.user.email
+        data['name'] = self.user.first_name
         data['isAdmin'] = self.user.is_staff
-        data['super'] = self.user.is_superuser
+        data['superuser'] = self.user.is_superuser
         data['id'] = self.user.id
-        data['date'] = datetime.date.today()
         return data
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -38,13 +36,12 @@ class MyTokenObtainPairView(TokenObtainPairView):
 def register(request):
     data = request.data
     user = User.objects.create(
-        first_name=data['first_name'],
-        last_name=data['last_name'],
+        first_name=data['name'],
         username=data['email'],
         email=data['email'],
         password=make_password(data['password']),
     )
-    serializer = UserSerializer(user, many=False)
+    serializer = CustomUserTokenSerializer(user, many=False)
     return Response(serializer.data)
 
 

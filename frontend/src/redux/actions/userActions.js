@@ -24,7 +24,7 @@ export const loginCall = (email, password) => async (dispatch) => {
             type: LOGIN_SUCCESS,
             payload: res.data
         })
-        localStorage.setItem('userToken', JSON.stringify(res.data.access))
+        localStorage.setItem('userToken', JSON.stringify(res.data))
         // add error handling
     } catch (err) {
         dispatch({
@@ -56,13 +56,13 @@ export const registerCall = (firstName, lastName, email, password) => async (dis
         )
         dispatch({
             type: REG_SUCCESS,
-            payload: res.data
+            payload: res
         })
         dispatch({
             type: LOGIN_SUCCESS,
-            payload: res.data
+            payload: res
         })
-        localStorage.setItem('userToken', JSON.stringify(res.data.access))
+        localStorage.setItem('userToken', JSON.stringify(res))
         // add error handling
     } catch (err) {
         dispatch({

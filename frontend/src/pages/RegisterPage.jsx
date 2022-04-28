@@ -33,7 +33,7 @@ useEffect(() => {
 const handleRegister = (e) => {
   e.preventDefault()
 
-  if (password.current.value != passwordConfirm.current.value) {
+  if (password.current.value !== passwordConfirm.current.value) {
       setError('Passwords do not match!')
   } else {
     dispatch(registerCall(firstName.current.value, lastName.current.value, email.current.value, password.current.value))
@@ -41,6 +41,7 @@ const handleRegister = (e) => {
   // navigate("/")
 
 }
+console.log(userToken)
 
   return (
     <div>
