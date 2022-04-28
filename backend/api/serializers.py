@@ -37,10 +37,8 @@ class CustomUserTokenSerializer(UserSerializer):
 
     def get_access(self, user):
         refresh = RefreshToken.for_user(user)
-
-        return {
-            'access': str(refresh.access_token),
-        }
+        access = str(refresh.access_token)
+        return access
 
 
 #Category Serializer
