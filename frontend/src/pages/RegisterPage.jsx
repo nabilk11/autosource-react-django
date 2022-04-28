@@ -6,8 +6,7 @@ import { registerCall } from '../redux/actions/userActions';
 
 export const RegisterPage = () => {
 // Login Info Refs
-const firstName = useRef()
-const lastName = useRef()
+const name = useRef()
 const email = useRef()
 const password = useRef()
 const passwordConfirm = useRef()
@@ -36,7 +35,7 @@ const handleRegister = (e) => {
   if (password.current.value !== passwordConfirm.current.value) {
       setError('Passwords do not match!')
   } else {
-    dispatch(registerCall(firstName.current.value, lastName.current.value, email.current.value, password.current.value))
+    dispatch(registerCall(name.current.value, email.current.value, password.current.value))
   }
   // navigate("/")
 
@@ -56,11 +55,8 @@ console.log(userToken)
           
             <Col md={6} >
             <Row className='mb-3' >
-            <Form.Label htmlFor='firstName' >First</Form.Label>
-            <Form.Control type='name' ref={firstName} required placeholder='First Name' >
-            </Form.Control>
-            <Form.Label htmlFor='lastName' >Last</Form.Label>
-            <Form.Control type='name' ref={lastName} required placeholder='Last Name'>
+            <Form.Label htmlFor='name' >Name</Form.Label>
+            <Form.Control type='name' ref={name} required placeholder='Name' >
             </Form.Control>
             </Row>
             <Row className='mb-3' >
