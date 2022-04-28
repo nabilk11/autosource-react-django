@@ -24,7 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
         isAdmin = user.is_staff
         return isAdmin
 
-    def superuser(self, user):
+    def get_superuser(self, user):
         superuser = user.is_superuser
         return superuser
 
