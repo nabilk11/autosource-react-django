@@ -36,6 +36,7 @@ export const loginCall = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
     localStorage.removeItem('userToken')
+    window.location.reload()
     dispatch({
         type: LOGOUT
     })
@@ -56,13 +57,13 @@ export const registerCall = (name, email, password) => async (dispatch) => {
         )
         dispatch({
             type: REG_SUCCESS,
-            payload: res
+            payload: res.data
         })
         dispatch({
             type: LOGIN_SUCCESS,
-            payload: res
+            payload: res.data
         })
-        localStorage.setItem('userToken', JSON.stringify(res))
+        localStorage.setItem('userToken', JSON.stringify(res.data))
         // add error handling
     } catch (err) {
         dispatch({
