@@ -10,6 +10,11 @@ export const REG_START = 'REG_START'
 export const REG_SUCCESS = 'REG_SUCCESS'
 export const REG_ERROR = 'REG_ERROR'
 
+// User Details
+export const DETAILS_START = 'DETAILS_START'
+export const DETAILS_SUCCESS = 'DETAILS_SUCCESS'
+export const DETAILS_ERROR = 'DETAILS_ERROR'
+
 
 // LOGIN REDUCER
 export const loginReducer = (state = { }, action) => {
@@ -39,6 +44,8 @@ export const loginReducer = (state = { }, action) => {
     } 
 }
 
+
+
 // REGISTER REDUCER
 export const registerReducer = (state = { }, action) => {
     switch (action.type) {
@@ -54,6 +61,31 @@ export const registerReducer = (state = { }, action) => {
              }
 
         case REG_ERROR:
+            return { 
+                loading: false, 
+                err: action.payload,
+             }
+        default:
+            return state
+    } 
+}
+
+// DETAILS REDUCER
+export const detailsReducer = (state = {user:{} }, action) => {
+    switch (action.type) {
+        case DETAILS_START:
+            return {
+                ...state, 
+                loading: true, 
+            }
+
+        case DETAILS_SUCCESS:
+            return { 
+                loading: false, 
+                userToken: action.payload,
+             }
+
+        case DETAILS_ERROR:
             return { 
                 loading: false, 
                 err: action.payload,

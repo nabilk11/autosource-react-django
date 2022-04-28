@@ -1,10 +1,8 @@
-import { 
-    LOGIN_ERROR, 
-    LOGIN_START, 
-    LOGIN_SUCCESS, 
-    LOGOUT,
-REG_ERROR, REG_START, REG_SUCCESS } from "../reducers/userReducer";
+import { LOGIN_ERROR, LOGIN_START,  LOGIN_SUCCESS, 
+    LOGOUT, REG_ERROR, REG_START, REG_SUCCESS, DETAILS_ERROR, DETAILS_START, DETAILS_SUCCESS } from "../reducers/userReducer";
 import axios from 'axios';
+
+
 
 
 export const loginCall = (email, password) => async (dispatch) => {
@@ -34,6 +32,9 @@ export const loginCall = (email, password) => async (dispatch) => {
     }   
 }
 
+
+
+
 export const logout = () => (dispatch) => {
     localStorage.removeItem('userToken')
     window.location.reload()
@@ -41,6 +42,8 @@ export const logout = () => (dispatch) => {
         type: LOGOUT
     })
 }
+
+
 
 export const registerCall = (name, email, password) => async (dispatch) => {
 
@@ -68,6 +71,39 @@ export const registerCall = (name, email, password) => async (dispatch) => {
     } catch (err) {
         dispatch({
         type: REG_ERROR,
+        payload: err, 
+    })   
+    }   
+}
+
+
+export const detailsCall = () => async (dispatch, getState) => {
+
+    try {
+        dispatch({
+            type: DETAILS_START
+        })
+
+        // getting token from redux state of logged in user
+        const {
+            login: { userToken }
+        } = getState()
+
+        // headers with Bearer Token
+        const headers = {'Content-Type': 'application/json',
+                        Authorization: `Bearer ${userToken.access}`}
+
+        const res = await axios.get('/api/users/profile/',
+        {headers: headers}
+        )
+        dispatch({
+            type: DETAILS_SUCCESS,
+            payload: res.data
+        })
+       
+    } catch (err) {
+        dispatch({
+        type: DETAILS_ERROR,
         payload: err, 
     })   
     }   
