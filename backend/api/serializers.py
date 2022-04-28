@@ -1,5 +1,3 @@
-from dataclasses import fields
-from os import access
 from rest_framework import serializers
 from .models import Category, Product
 from django.contrib.auth.models import User

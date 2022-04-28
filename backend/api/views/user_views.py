@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from rest_framework import status, permissions
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-import datetime
+
 
 
 ####### SIMPLE JWT TOKEN SERIALIZER X VIEW #######
