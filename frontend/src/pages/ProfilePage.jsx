@@ -36,7 +36,7 @@ useEffect(() => {
     }
     }, [dispatch])
 
-console.log(user)
+
     // LOGIN HANDLER
 const handleUpdate = (e) => {
         e.preventDefault()
@@ -98,6 +98,11 @@ const handleUpdate = (e) => {
                 </Card>
             </Row>
         </Col>
+
+        <Col>
+
+        </Col>
+        
     </Container>
   )
 }
