@@ -2,18 +2,33 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Form, Container, Alert, Button, Row, Card, Col  } from 'react-bootstrap';
 import { useDispatch, useSelector  } from 'react-redux';
+import { addShippingAddress } from '../redux/actions/cartActions';
+
 
 export const ShippingPage = () => {
-    const [address, setAddress] = useState()
-    const [city, setCity] = useState()
-    const [zipCode, setZipCode] = useState()
-    const [state, setState] = useState()
-    const [country, setCountry] = useState()
+    // redux
+    const cart = useSelector(state => state.cart)
+    const { shippingAddress } = cart
+    const dispatch = useDispatch()
+    // useNavigate
+    const navigate = useNavigate()
+
+
+
+    const [address, setAddress] = useState(shippingAddress.address)
+    const [city, setCity] = useState(shippingAddress.city)
+    const [zipCode, setZipCode] = useState(shippingAddress.zipCode)
+    const [state, setState] = useState(shippingAddress.state)
+    const [country, setCountry] = useState(shippingAddress.country)
+
+    
 
 
     const handleSubmit = (e) =>{
         e.preventDefault()
         console.log('sub')
+        dispatch(addShippingAddress({address, city, state, zipCode, country}))
+        navigate('/payment')
 
     }
   return (
