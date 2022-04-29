@@ -4,7 +4,11 @@ export const ADD_TO_CART = 'ADD_TO_CART'
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
 export const CART_ERROR = 'CART_ERROR'
 
-export const cartReducer = (state = { cartProds:[] }, action) => {
+// Add Shipping Address
+export const ADD_SHIPPING = 'ADD_SHIPPING'
+
+
+export const cartReducer = (state = { cartProds:[], shippingAddress : { } }, action) => {
     switch (action.type) {
         case ADD_TO_CART:
             const duplicate = state.cartProds.find(c => c.product === (action.payload).product)
@@ -24,9 +28,15 @@ export const cartReducer = (state = { cartProds:[] }, action) => {
                 ...state,
                 cartProds:state.cartProds.filter(p => p.product !== action.payload)
             }
+
+        case ADD_SHIPPING:
+            return{
+                ...state,
+                shippingAddress: action.payload,
+            }
         default:
             return state
 
     }
 }
-export default cartReducer
+
