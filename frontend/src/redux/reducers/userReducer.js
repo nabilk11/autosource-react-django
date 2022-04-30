@@ -100,7 +100,7 @@ export const detailsReducer = (state = { user :{ } }, action) => {
     } 
 }
 
-// DETAILS REDUCER
+// UPDATE REDUCER
 export const updateReducer = (state = { }, action) => {
     switch (action.type) {
         case UPDATE_START:

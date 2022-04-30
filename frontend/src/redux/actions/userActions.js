@@ -132,7 +132,7 @@ export const updateCall = (user) => async (dispatch, getState) => {
         const headers = {'Content-Type': 'application/json',
                         Authorization: `Bearer ${userToken.access}`}
 
-        const res = await axios.get(`/api/users/profile/update/`,
+        const res = await axios.put(`/api/users/profile/update/`, user,
         {headers: headers}
         )
         dispatch({
