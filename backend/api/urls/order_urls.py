@@ -5,6 +5,6 @@ from api.views import order_views
 
 
 urlpatterns = [
-    # path('', order_views.home, name='home'),
+    path('new/', order_views.add_order, name='order'),
     
 ]
