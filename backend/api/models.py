@@ -87,7 +87,7 @@ class OrderedProducts(models.Model):
 # Shipping Information
 class ShippingInfo(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE, blank=True, null=True)
-    shippingCost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    shippingCost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0)
     address = models.CharField(max_length=155, null=True, blank=True)
     city = models.CharField(max_length=155, null=True, blank=True)
     state = models.CharField(max_length=155, null=True, blank=True)
@@ -96,7 +96,7 @@ class ShippingInfo(models.Model):
     # shippingDate = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return self.order
+        return self.order.user.first_name
 
     class Meta:
         ordering = ['createdAt']

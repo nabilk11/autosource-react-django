@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Form, Container, Alert, Image, Button, Row, Card, Col, ListGroup, ListGroupItem  } from 'react-bootstrap';
 import { useDispatch, useSelector  } from 'react-redux';
 import { orderCall } from '../redux/actions/orderActions';
+import { ORDER_RESET } from '../redux/reducers/orderReducer';
 
 export const OrderPage = () => {
 
@@ -27,7 +28,8 @@ export const OrderPage = () => {
 
      useEffect(() => {
          if (message) {
-             navigate(`/order/${order.id}`)
+             navigate(`/order/${order._id}`)
+             dispatch({type: ORDER_RESET })
          }
      })
 
