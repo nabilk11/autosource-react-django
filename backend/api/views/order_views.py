@@ -46,5 +46,6 @@ def add_order(request):
             )
             product.count -= item.qty
             product.save()
+    serializer = OrderSerializer(order, many=True)
 
-    return Response()
+    return Response(serializer.data)
