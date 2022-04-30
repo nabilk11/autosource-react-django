@@ -1,9 +1,8 @@
-from backend.api.models import ShippingInfo
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from api.models import Product, Category, OrderedProducts, Order
+from api.models import Product, Category, OrderedProducts, Order, ShippingInfo
 from api.serializers import *
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
@@ -11,7 +10,7 @@ from rest_framework import status, permissions
 
 
 
-@api_view('POST')
+@api_view(['POST'])
 @permission_classes(['IsAuthenticated'])
 def add_order(request):
     user = request.user
