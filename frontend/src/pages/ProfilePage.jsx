@@ -35,7 +35,9 @@ useEffect(() => {
             setEmail(user.email)
         
     }
-    }, [dispatch]) 
+
+    }, [dispatch])
+
 
 
     // LOGIN HANDLER

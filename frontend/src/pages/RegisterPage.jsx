@@ -78,7 +78,6 @@ console.log(userToken)
           <Button type='submit' >
             Register
           </Button>
-          <p className="">Forgot Password?</p>
           <p className="">Already Have an Account? <Link to={"/login"} > Login Here</Link></p>
         </Form>
         </Card.Body>
