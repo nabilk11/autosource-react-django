@@ -21,11 +21,15 @@ const cartStored = localStorage.getItem('cartProds') ? JSON.parse(localStorage.g
 // userToken Data
 const userTokenStored = localStorage.getItem('userToken') ? JSON.parse(localStorage.getItem('userToken')) : null
 
+// shipping address Data
+const shippingAddressStored = localStorage.getItem('shippingAddress') ? JSON.parse(localStorage.getItem('shippingAddress')) : { }
+
 
 // Initial State
 const initState = {
     cart: {
         cartProds: cartStored,
+        shippingAddress: shippingAddressStored,
     },
     login: {userToken: userTokenStored },
     // register: {userToken: userTokenStored},
