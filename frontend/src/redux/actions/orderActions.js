@@ -19,7 +19,7 @@ export const orderCall = (order) => async (dispatch, getState) => {
         const headers = {'Content-Type': 'application/json',
                         Authorization: `Bearer ${userToken.access}`}
 
-        const res = await axios.post(`/api/orders/new/`,
+        const res = await axios.post(`/api/orders/new/`, order,
         {headers: headers}
         )
         dispatch({

@@ -2,10 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Form, Container, Alert, Image, Button, Row, Card, Col, ListGroup, ListGroupItem  } from 'react-bootstrap';
 import { useDispatch, useSelector  } from 'react-redux';
+import { orderCall } from '../redux/actions/orderActions';
 
 export const OrderPage = () => {
 
      // redux
+    const addOrder = useSelector(state => state.addOrder)
+    const { order, err, message } = addOrder
+
      const cart = useSelector(state => state.cart)
      const { shippingAddress, paymentType, cartProds } = cart
      const dispatch = useDispatch()
@@ -17,9 +21,31 @@ export const OrderPage = () => {
      cart.tax = Number((0.08875) * cart.subtotal).toFixed(2)
      cart.total = Number(cart.subtotal) + Number(cart.tax) 
 
+     if (!paymentType) {
+         navigate('/payment')
+     }
+
+     useEffect(() => {
+         if (message) {
+             navigate(`/order/${order.id}`)
+         }
+     })
+
      const orderSubmit = () => {
+         dispatch(orderCall({
+            products: cartProds,
+            shippingAddress: shippingAddress,
+            paymentType: paymentType,
+            tax:cart.tax,
+            shipping: 0,
+            total: cart.total,
+
+
+         }))
          
      }
+
+
 
 
   return (
@@ -68,6 +94,10 @@ export const OrderPage = () => {
                     <Card>
                         <h2>Summary</h2>
                         <ListGroup>
+                            <ListGroupItem>
+                                {err && <Alert variant='danger' >{err.message}</Alert>}
+                                {message && <Alert>{message}</Alert>}
+                            </ListGroupItem>
                             <ListGroupItem>
                                 <Card.Text>
                                     Subtotal: $ {cart.subtotal}  

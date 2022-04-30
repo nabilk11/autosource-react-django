@@ -93,18 +93,18 @@ class ShippingInfo(models.Model):
     state = models.CharField(max_length=155, null=True, blank=True)
     zipCode = models.CharField(max_length=10, null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
-    shippingDate = models.DateField(null=True, blank=True)
+    # shippingDate = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.order
 
     class Meta:
-        ordering = ['shippingDate']
+        ordering = ['createdAt']
 
-# standard 3 days shipping
-    def save(self, *args, **kwargs):
-        if self.shippingDate is None:
-            self.shippingDate = self.createdAt.date() + datetime.timedelta(days=3)
-        super(ShippingInfo, self).save(*args, **kwargs)   
+# # standard 3 days shipping
+#     def save(self, *args, **kwargs):
+#         if self.shippingDate is None:
+#             self.shippingDate = self.createdAt.date() + datetime.timedelta(days=3)
+#         super(ShippingInfo, self).save(*args, **kwargs)   
 
 
