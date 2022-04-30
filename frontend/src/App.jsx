@@ -13,7 +13,7 @@ import { ProfilePage } from './pages/ProfilePage';
 import { ShippingPage } from './pages/ShippingPage';
 import { PaymentPage } from './pages/PaymentPage';
 import { OrderPage } from './pages/OrderPage';
-import { ProfilePage } from './pages/ProfilePage';
+
 
 function App() {
   return (
