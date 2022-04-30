@@ -56,7 +56,7 @@ class Order(models.Model):
     _id = models.AutoField(primary_key=True, editable=False)
     paymentType = models.CharField(max_length=200, null=True, blank=True)
     tax = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    shipping = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    shipping = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0)
     totalPrice = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     paymentCompleted = models.BooleanField(default=False)
     paymentTime = models.DateTimeField(auto_now_add=False, null=True, blank=True)
@@ -93,7 +93,7 @@ class ShippingInfo(models.Model):
     state = models.CharField(max_length=155, null=True, blank=True)
     zipCode = models.CharField(max_length=10, null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
-    shippingDate = models.DateField()
+    shippingDate = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.order
