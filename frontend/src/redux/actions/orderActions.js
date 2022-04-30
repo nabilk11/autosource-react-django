@@ -1,6 +1,7 @@
 import { ADD_ORDER_ERROR, 
     ADD_ORDER_START, 
     ADD_ORDER_SUCCESS } from "../reducers/orderReducer";
+import { EMPTY_CART } from "../reducers/cartReducer";
 import axios from 'axios';
 
 export const orderCall = (order) => async (dispatch, getState) => {
@@ -27,6 +28,12 @@ export const orderCall = (order) => async (dispatch, getState) => {
             payload: res.data
         })
 
+
+        dispatch({
+            type: EMPTY_CART,
+            payload: res.data
+        })
+        localStorage.removeItem('cartProds')
     } catch (err) {
         dispatch({
         type: ADD_ORDER_ERROR,
