@@ -4,7 +4,10 @@ import {
     LOGIN_SUCCESS, 
     LOGOUT,
 REG_ERROR, REG_START, REG_SUCCESS, DETAILS_ERROR, DETAILS_START, DETAILS_SUCCESS, UPDATE_ERROR, UPDATE_START, UPDATE_SUCCESS } from "../reducers/userReducer";
+
 import axios from 'axios';
+
+
 
 
 export const loginCall = (email, password) => async (dispatch) => {
@@ -34,6 +37,9 @@ export const loginCall = (email, password) => async (dispatch) => {
     }   
 }
 
+
+
+
 export const logout = () => (dispatch) => {
     localStorage.removeItem('userToken')
     window.location.reload()
@@ -41,6 +47,8 @@ export const logout = () => (dispatch) => {
         type: LOGOUT
     })
 }
+
+
 
 export const registerCall = (name, email, password) => async (dispatch) => {
 

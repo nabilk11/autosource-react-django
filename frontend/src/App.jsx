@@ -9,6 +9,7 @@ import { Home } from './pages/Home';
 import { CartPage } from './pages/CartPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
+import { ProfilePage } from './pages/ProfilePage';
 import { ShippingPage } from './pages/ShippingPage';
 import { PaymentPage } from './pages/PaymentPage';
 import { OrderPage } from './pages/OrderPage';

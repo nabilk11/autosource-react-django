@@ -3,6 +3,7 @@ import { legacy_createStore as createStore, combineReducers, applyMiddleware } f
 import thunk from 'redux-thunk';
 import prodReducers from './reducers/prodReducer';
 import { cartReducer } from "./reducers/cartReducer";
+
 import { loginReducer, registerReducer, detailsReducer, updateReducer  } from "./reducers/userReducer";
 
 // Reducer
