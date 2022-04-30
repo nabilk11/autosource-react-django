@@ -1,7 +1,8 @@
 import { CART_ERROR, 
     ADD_TO_CART, 
-    REMOVE_FROM_CART } from "../reducers/cartReducer";
+    REMOVE_FROM_CART, ADD_SHIPPING, ADD_PAYMENT } from "../reducers/cartReducer";
 import axios from 'axios';
+import { Action } from "history";
 
 export const addToCart = (id, stock) => async (dispatch, getState) => {
     const res = await axios.get('/api/products/'+id)
@@ -26,5 +27,24 @@ export const removeFromCart = (id) => (dispatch, getState) => {
         payload: id, 
     })
     localStorage.setItem('cartProds', JSON.stringify(getState().cart.cartProds))
+
+}
+
+
+export const addShippingAddress = (formData) => (dispatch) => {
+    dispatch({
+        type: ADD_SHIPPING,
+        payload: formData, 
+    })
+    localStorage.setItem('shippingAddress', JSON.stringify(formData))
+
+}
+
+export const addPaymentType = (formData) => (dispatch) => {
+    dispatch({
+        type: ADD_PAYMENT,
+        payload: formData, 
+    })
+    localStorage.setItem('paymentType', JSON.stringify(formData))
 
 }

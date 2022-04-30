@@ -9,6 +9,9 @@ import { Home } from './pages/Home';
 import { CartPage } from './pages/CartPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
+import { ShippingPage } from './pages/ShippingPage';
+import { PaymentPage } from './pages/PaymentPage';
+import { OrderPage } from './pages/OrderPage';
 
 
 function App() {
@@ -25,6 +28,9 @@ function App() {
         <Route path='/product/:id' element={<ProductPage />}  />
         <Route path='/cart/:id' element={<CartPage />}  />
         <Route path='/cart' element={<CartPage />}  />
+        <Route path='/shipping' element={<ShippingPage />}  />
+        <Route path='/payment' element={<PaymentPage />}  />
+        <Route path='/order' element={<OrderPage />}  />
       </Routes>
     </Container>
     </main>
