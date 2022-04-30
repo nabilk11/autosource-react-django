@@ -6,6 +6,8 @@ export const CART_ERROR = 'CART_ERROR'
 
 // Add Shipping Address
 export const ADD_SHIPPING = 'ADD_SHIPPING'
+// Add Payment Type
+export const ADD_PAYMENT = 'ADD_PAYMENT'
 
 
 export const cartReducer = (state = { cartProds:[], shippingAddress : { } }, action) => {
@@ -33,6 +35,12 @@ export const cartReducer = (state = { cartProds:[], shippingAddress : { } }, act
             return{
                 ...state,
                 shippingAddress: action.payload,
+            }
+
+        case ADD_PAYMENT:
+            return{
+                ...state,
+                paymentType: action.payload 
             }
         default:
             return state
