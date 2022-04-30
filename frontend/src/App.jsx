@@ -12,7 +12,7 @@ import { RegisterPage } from './pages/RegisterPage';
 import { ShippingPage } from './pages/ShippingPage';
 import { PaymentPage } from './pages/PaymentPage';
 import { OrderPage } from './pages/OrderPage';
-
+import { ProfilePage } from './pages/ProfilePage';
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
         <Route path='/' exact element={<Home />}  />
         <Route path='/login' element={<LoginPage />}  />
         <Route path='/register' element={<RegisterPage />}  />
+        <Route path='/profile' element={<ProfilePage />}  />
         <Route path='/products' element={<AllProducts />}  />
         <Route path='/product/:id' element={<ProductPage />}  />
         <Route path='/cart/:id' element={<CartPage />}  />

@@ -10,6 +10,16 @@ export const REG_START = 'REG_START'
 export const REG_SUCCESS = 'REG_SUCCESS'
 export const REG_ERROR = 'REG_ERROR'
 
+// User Details
+export const DETAILS_START = 'DETAILS_START'
+export const DETAILS_SUCCESS = 'DETAILS_SUCCESS'
+export const DETAILS_ERROR = 'DETAILS_ERROR'
+
+// User Update
+export const UPDATE_START = 'UPDATE_START'
+export const UPDATE_SUCCESS = 'UPDATE_SUCCESS'
+export const UPDATE_ERROR = 'UPDATE_ERROR'
+
 
 // LOGIN REDUCER
 export const loginReducer = (state = { }, action) => {
@@ -62,3 +72,55 @@ export const registerReducer = (state = { }, action) => {
             return state
     } 
 }
+
+// DETAILS REDUCER
+export const detailsReducer = (state = { user :{ } }, action) => {
+    switch (action.type) {
+        case DETAILS_START:
+            return {
+                ...state, 
+                loading: true, 
+            }
+
+        case DETAILS_SUCCESS:
+            return { 
+                loading: false, 
+                user: action.payload,
+             }
+
+        case DETAILS_ERROR:
+            return { 
+                loading: false, 
+                err: action.payload,
+             }
+        default:
+            return state
+    } 
+}
+
+// DETAILS REDUCER
+export const updateReducer = (state = { }, action) => {
+    switch (action.type) {
+        case UPDATE_START:
+            return {
+                ...state, 
+                loading: true, 
+            }
+
+        case UPDATE_SUCCESS:
+            return { 
+                loading: false, 
+                user: action.payload,
+                message: true,
+             }
+
+        case DETAILS_ERROR:
+            return { 
+                loading: false, 
+                err: action.payload,
+             }
+        default:
+            return state
+    } 
+}
+
