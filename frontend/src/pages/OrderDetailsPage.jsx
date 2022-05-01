@@ -44,34 +44,16 @@ export const OrderDetailsPage = () => {
     <Container>
         <Row>
             <h1>Order Details</h1>
-            <Col>
+            <Col md={8} >
                 {order && <Card>
                     <Card.Header>
                        <h2> Order #: {order.data._id}</h2>
                     </Card.Header>
                     <Card.Body>
                         <ListGroup>
-                            <ListGroupItem>
+                        <ListGroupItem>
                                 <Card.Text style={{textTransform: "uppercase"}} >
-                                   <h2><strong> Total: $ {order.data.totalPrice} </strong></h2>
-                                </Card.Text>
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <Card.Text style={{textTransform: "uppercase"}} >
-                                    Payment Type: {order.data.paymentType}
-                                </Card.Text>
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <Card.Text style={{textTransform: "uppercase"}} >
-                                   <h3>Shipping Info:</h3>  
-                                   {shipping.address} <br />
-                                   {shipping.city}, {shipping.state}, {shipping.zipCode}
-                                </Card.Text>
-                                
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <Card.Text style={{textTransform: "uppercase"}} >
-                                   <h3>Products Purchased:</h3>  
+                                   <h3><strong>Products Purchased:</strong></h3>  
                                    {order.data.orderProducts.map((p)=> (
                                        <ul>
                                            <li> <strong> <Link to={`/product/${p.product}`} > {p.name}</Link></strong> qty:
@@ -83,11 +65,49 @@ export const OrderDetailsPage = () => {
                                 </Card.Text>
                                 
                             </ListGroupItem>
-
+                            <ListGroupItem>
+                                <Card.Text style={{textTransform: "uppercase"}} >
+                                    <h3><strong>Cost:</strong></h3>
+                                    <p>Tax: $ {order.data.tax}</p>
+                                    <p>Shipping: FREE</p>
+                                   <h2><strong> Total: $ {order.data.totalPrice} </strong></h2>
+                                </Card.Text>
+                            </ListGroupItem>
+                            <ListGroupItem>
+                                <Card.Text style={{textTransform: "uppercase"}} >
+                                    Payment Type: {order.data.paymentType}
+                                </Card.Text>
+                            </ListGroupItem>
                         </ListGroup>
                         
                     </Card.Body>
                 </Card>}
+            </Col>
+            <Col md={4} >
+            {(shipping && order) && <Card>
+            <h2>Deliver Info</h2>
+                <ListGroup>
+                    <ListGroupItem>
+                    <Card.Text style={{textTransform: "uppercase"}}>
+                        <h3><strong>Status:</strong></h3>
+                        
+
+
+                    </Card.Text>
+
+                    </ListGroupItem>
+                    <ListGroupItem>
+                                <Card.Text style={{textTransform: "uppercase"}} >
+                                   <h3><strong>Shipping Info:</strong></h3>  
+                                   {shipping.address} <br />
+                                   {shipping.city}, {shipping.state}, {shipping.zipCode}
+                                </Card.Text>
+                            </ListGroupItem>
+
+
+                </ListGroup>
+            </Card>}
+            
             </Col>
         </Row>
     </Container>

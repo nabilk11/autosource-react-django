@@ -62,7 +62,7 @@ class Order(models.Model):
     paymentTime = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     deliveryTime = models.BooleanField(default=False)
     delivered = models.BooleanField(default=False)
-    createdAt = models.DateTimeField(auto_now_add=False, null=True, blank=True)
+    createdAt = models.DateTimeField(auto_now_add=True, null=False, blank=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     
 
@@ -92,8 +92,8 @@ class ShippingInfo(models.Model):
     city = models.CharField(max_length=155, null=True, blank=True)
     state = models.CharField(max_length=155, null=True, blank=True)
     zipCode = models.CharField(max_length=10, null=True, blank=True)
-    createdAt = models.DateTimeField(auto_now_add=True)
-    # shippingDate = models.DateField(null=True, blank=True)
+    createdAt = models.DateTimeField(default = datetime.date.today)
+    shippingDate = models.DateTimeField()
 
     def __str__(self):
         return 'Order #: '+ str(self.order._id)
@@ -101,10 +101,10 @@ class ShippingInfo(models.Model):
     class Meta:
         ordering = ['createdAt']
 
-# # standard 3 days shipping
-#     def save(self, *args, **kwargs):
-#         if self.shippingDate is None:
-#             self.shippingDate = self.createdAt.date() + datetime.timedelta(days=3)
-#         super(ShippingInfo, self).save(*args, **kwargs)   
+# standard 3 days shipping
+    def save(self, *args, **kwargs):
+        if self.shippingDate is None:
+            self.shippingDate = self.createdAt + datetime.timedelta(days=3)
+        super(ShippingInfo, self).save(*args, **kwargs)   
 
 
