@@ -48,3 +48,24 @@ def add_order(request):
         serializer = OrderSerializer(order, many=False)
 
         return Response(serializer.data)
+
+
+# Get Order
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_order(request, pk):
+    user = request.user
+
+    try:
+        order = Order.objects.get(_id=pk)
+        if user.is_staff or order.user == user:
+            serializer = OrderSerializer(order, many=False)
+            return Response(serializer.data)
+        else:
+            Response({'err': 'Not Authorized!'})
+    except:
+        return Response({'err': 'No Order with that ID!'})
+            
+
+
+
