@@ -13,6 +13,7 @@ import { ProfilePage } from './pages/ProfilePage';
 import { ShippingPage } from './pages/ShippingPage';
 import { PaymentPage } from './pages/PaymentPage';
 import { OrderPage } from './pages/OrderPage';
+import { OrderDetailsPage } from './pages/OrderDetailsPage';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path='/shipping' element={<ShippingPage />}  />
         <Route path='/payment' element={<PaymentPage />}  />
         <Route path='/order' element={<OrderPage />}  />
+        <Route path='/order/:id' element={<OrderDetailsPage />}  />
       </Routes>
     </Container>
     </main>

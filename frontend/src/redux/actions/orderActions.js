@@ -1,6 +1,6 @@
 import { ADD_ORDER_ERROR, 
     ADD_ORDER_START, 
-    ADD_ORDER_SUCCESS } from "../reducers/orderReducer";
+    ADD_ORDER_SUCCESS, ORDER_DETAILS_ERROR, ORDER_DETAILS_START, ORDER_DETAILS_SUCCESS } from "../reducers/orderReducer";
 import { EMPTY_CART } from "../reducers/cartReducer";
 import axios from 'axios';
 
@@ -63,7 +63,7 @@ export const orderDetailsCall = (id) => async (dispatch, getState) => {
         )
         dispatch({
             type: ORDER_DETAILS_SUCCESS,
-            payload: res.data
+            payload: res
         })
 
     } catch (err) {

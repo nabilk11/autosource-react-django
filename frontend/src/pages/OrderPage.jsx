@@ -20,7 +20,7 @@ export const OrderPage = () => {
      // Calculations
      cart.subtotal = cartProds.reduce((x, y) => x + y.price * y.stock, 0).toFixed(2)
      cart.tax = Number((0.08875) * cart.subtotal).toFixed(2)
-     cart.total = Number(cart.subtotal) + Number(cart.tax) 
+     cart.total = (Number(cart.subtotal) + Number(cart.tax)).toFixed(2) 
 
      if (!paymentType) {
          navigate('/payment')
@@ -117,7 +117,7 @@ export const OrderPage = () => {
                             </ListGroupItem>
                             <ListGroupItem>
                                 <Card.Text>
-                                    Total Price: $ {cart.total}
+                                   <strong>Total Price: $ {cart.total}</strong>
                                 </Card.Text>
                             </ListGroupItem>
                             <Button onClick={orderSubmit} >
