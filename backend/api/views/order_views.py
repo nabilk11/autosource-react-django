@@ -7,6 +7,7 @@ from api.serializers import *
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from rest_framework import status, permissions
+import datetime
 
 
 
@@ -77,5 +78,16 @@ def get_shipping(request, pk):
         return Response(serializer.data)
     except:
         return Response({'err': 'No Shipping Info'})
+
+
+
+@api_view(['PUT'])
+def order_paid(request, pk):
+    order = Order.objects.get(_id=pk)
+    order.paymentCompleted = True
+    order.paymentTime = datetime.now()
+    order.save()
+    return Response('Payment Completed!')
+
 
         
