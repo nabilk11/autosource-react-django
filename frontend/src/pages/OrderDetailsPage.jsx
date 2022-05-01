@@ -43,14 +43,25 @@ export const OrderDetailsPage = () => {
   return (
     <Container>
         <Row>
-            <h1>Order Details</h1>
+            
             <Col md={8} >
+            <h1>Order Details</h1>
                 {order && <Card>
                     <Card.Header>
                        <h2> Order #: {order.data._id}</h2>
                     </Card.Header>
                     <Card.Body>
                         <ListGroup>
+                            <ListGroupItem>
+                                <Card.Text>
+                                    <h2><strong>User Info</strong></h2>
+                                    <p>Name: {order.data.user.name} <br />
+                                    Email: {order.data.user.email}
+                                    
+                                    </p>
+                                    
+                                </Card.Text>
+                            </ListGroupItem>
                         <ListGroupItem>
                                 <Card.Text style={{textTransform: "uppercase"}} >
                                    <h3><strong>Products Purchased:</strong></h3>  
@@ -67,17 +78,15 @@ export const OrderDetailsPage = () => {
                             </ListGroupItem>
                             <ListGroupItem>
                                 <Card.Text style={{textTransform: "uppercase"}} >
+                                
                                     <h3><strong>Cost:</strong></h3>
+                                    <p>Payment Type: {order.data.paymentType}</p>
                                     <p>Tax: $ {order.data.tax}</p>
                                     <p>Shipping: FREE</p>
                                    <h2><strong> Total: $ {order.data.totalPrice} </strong></h2>
                                 </Card.Text>
                             </ListGroupItem>
-                            <ListGroupItem>
-                                <Card.Text style={{textTransform: "uppercase"}} >
-                                    Payment Type: {order.data.paymentType}
-                                </Card.Text>
-                            </ListGroupItem>
+            
                         </ListGroup>
                         
                     </Card.Body>
@@ -90,7 +99,8 @@ export const OrderDetailsPage = () => {
                     <ListGroupItem>
                     <Card.Text style={{textTransform: "uppercase"}}>
                         <h3><strong>Status:</strong></h3>
-                        
+                        {order.data.delivered ? <strong style={{color: 'green'}} >ORDER DELIVERED</strong> : <p style={{color: 'red'}} >On its Way!</p>}
+                       <strong>Delivery Date: {(new Date(shipping.shippingDate)).toLocaleDateString()}</strong>
 
 
                     </Card.Text>
