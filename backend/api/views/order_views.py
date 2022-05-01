@@ -1,3 +1,4 @@
+from backend.api.models import PaymentInfo
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -81,13 +82,34 @@ def get_shipping(request, pk):
 
 
 
-@api_view(['PUT'])
+# @api_view(['PUT'])
+# def order_paid(request, pk):
+#     order = Order.objects.get(_id=pk)
+#     order.paymentCompleted = True
+#     order.paymentTime = datetime.now()
+#     order.save()
+#     return Response('Payment Completed!')
+
+
+@api_view(['POST', 'PUT'])
 def order_paid(request, pk):
     order = Order.objects.get(_id=pk)
-    order.paymentCompleted = True
-    order.paymentTime = datetime.now()
-    order.save()
-    return Response('Payment Completed!')
-
-
-        
+    user = request.user
+    data = request.data
+    if request.method == 'PUT':
+        order.paymentCompleted = True
+        order.paymentTime = datetime.now()
+        order.save()
+        return Response('Payment Completed!')
+    if request.method == 'POST':
+        payment = PaymentInfo.objects.create(
+            order = order,
+            ccNum = data['ccNum'],
+            exp = data['exp'],
+            sec = data['sec'],
+            ppUser = data['ppUser'],
+            ppPass = data['ppPass'],
+            user = user,
+        )
+        serializer = PaymentSerializer(payment, many=False)
+        return Response(serializer.data)

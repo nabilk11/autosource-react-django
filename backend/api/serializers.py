@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Product, ShippingInfo, Order, OrderedProducts
+from .models import Category, PaymentInfo, Product, ShippingInfo, Order, OrderedProducts
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -95,3 +95,8 @@ class OrderSerializer(serializers.ModelSerializer):
         serializer = UserSerializer(user, many=False)
         return serializer.data
 
+#Shipping Serializer
+class PaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PaymentInfo
+        fields = '__all__'
