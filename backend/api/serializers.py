@@ -86,9 +86,9 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def get_shipping(self, order):
         try:
-            address = ShippingInfoSerializer(order['shipping'], many=False).data
-        except: address = False
-        return address
+            shipping = ShippingInfoSerializer(order['shipping'], many=False).data
+        except: shipping = False
+        return shipping
 
     def get_user(self, order):
         user = order.user

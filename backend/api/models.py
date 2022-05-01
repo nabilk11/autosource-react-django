@@ -96,7 +96,7 @@ class ShippingInfo(models.Model):
     # shippingDate = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return self.order.user.first_name
+        return 'Order #: '+ str(self.order._id)
 
     class Meta:
         ordering = ['createdAt']

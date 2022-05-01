@@ -11,6 +11,8 @@ export const OrderDetailsPage = () => {
     const dispatch = useDispatch()
     const orderId = useParams().id
 
+    const [shipping, setShipping] = useState({})
+
    
 
     const orderDetails = useSelector(state => state.orderDetails)
@@ -25,12 +27,13 @@ export const OrderDetailsPage = () => {
     
 
     useEffect(() => {
-    //    const fetchShipping = async () => {
-    //        const res = await axios.get('/api/orders/'+orderId)
-    //        console.log(res)
-    //    }
+       const fetchShipping = async (id) => {
+           const res = await axios.get('/api/orders/shipping/'+id)
+           setShipping(res.data)
+       }
        
        dispatch(orderDetailsCall(orderId))
+       fetchShipping(orderId)
        
         
     }, [orderId])
@@ -40,15 +43,16 @@ export const OrderDetailsPage = () => {
   return (
     <Container>
         <Row>
+            <h1>Order Details</h1>
             <Col>
                 {order && <Card>
                     <Card.Header>
-                        Order #: {order.data._id}
+                       <h2> Order #: {order.data._id}</h2>
                     </Card.Header>
                     <Card.Body>
                         <ListGroup>
                             <ListGroupItem>
-                                <Card.Text>
+                                <Card.Text style={{textTransform: "uppercase"}} >
                                    <h2><strong> Total: $ {order.data.totalPrice} </strong></h2>
                                 </Card.Text>
                             </ListGroupItem>
@@ -56,6 +60,28 @@ export const OrderDetailsPage = () => {
                                 <Card.Text style={{textTransform: "uppercase"}} >
                                     Payment Type: {order.data.paymentType}
                                 </Card.Text>
+                            </ListGroupItem>
+                            <ListGroupItem>
+                                <Card.Text style={{textTransform: "uppercase"}} >
+                                   <h3>Shipping Info:</h3>  
+                                   {shipping.address} <br />
+                                   {shipping.city}, {shipping.state}, {shipping.zipCode}
+                                </Card.Text>
+                                
+                            </ListGroupItem>
+                            <ListGroupItem>
+                                <Card.Text style={{textTransform: "uppercase"}} >
+                                   <h3>Products Purchased:</h3>  
+                                   {order.data.orderProducts.map((p)=> (
+                                       <ul>
+                                           <li> <strong> <Link to={`/product/${p.product}`} > {p.name}</Link></strong> qty:
+                                           <span> {p.qty}</span>
+                                           </li>
+                                       </ul>
+                                   ))} <br />
+                                   
+                                </Card.Text>
+                                
                             </ListGroupItem>
 
                         </ListGroup>

@@ -68,4 +68,14 @@ def get_order(request, pk):
             
 
 
+@api_view(['GET'])
+def get_shipping(request, pk):
+    try:
+        order = Order.objects.get(_id=pk)
+        shippingInfo = ShippingInfo.objects.get(order=order)
+        serializer = ShippingInfoSerializer(shippingInfo, many=False)
+        return Response(serializer.data)
+    except:
+        return Response({'err': 'No Shipping Info'})
 
+        
