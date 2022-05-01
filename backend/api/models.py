@@ -111,14 +111,22 @@ class ShippingInfo(models.Model):
 # Payment Model
 class PaymentInfo(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE, blank=True)
-    ccNum = models.IntegerField(max_digits=16, null=True, blank=True)
+    ccNum = models.CharField(max_length=17, null=True, blank=True)
     exp = models.DateField(null=True, blank=True)
-    sec = models.IntegerField(max_digits=5, null=True, blank=True)
-    payType = models.CharField(max_length=55, default=order.paymentType, null=True, blank=True)
+    sec = models.CharField(max_length=5, null=True, blank=True)
+    paymentType = models.CharField(max_length=55, null=True, blank=True)
     ppUser = models.CharField(max_length=55, null=True, blank=True)
     ppPass = models.CharField(max_length=55, null=True, blank=True)
-    createdAt = models.DateTimeField(default = datetime.now)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    createdAt = models.DateTimeField(default = datetime.date.today)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return 'Order #: '+ str(self.order._id)
+
+    class Meta:
+        ordering = ['createdAt']
+
+    def save(self, *args, **kwargs):
+        if self.paymentType is None:
+            self.paymentType = self.order.paymentType
+        super(PaymentInfo, self).save(*args, **kwargs)
