@@ -108,3 +108,17 @@ class ShippingInfo(models.Model):
         super(ShippingInfo, self).save(*args, **kwargs)   
 
 
+# Payment Model
+class PaymentInfo(models.Model):
+    order = models.OneToOneField(Order, on_delete=models.CASCADE, blank=True)
+    ccNum = models.IntegerField(max_digits=16, null=True, blank=True)
+    exp = models.DateField(null=True, blank=True)
+    sec = models.IntegerField(max_digits=5, null=True, blank=True)
+    payType = models.CharField(max_length=55, default=order.paymentType, null=True, blank=True)
+    ppUser = models.CharField(max_length=55, null=True, blank=True)
+    ppPass = models.CharField(max_length=55, null=True, blank=True)
+    createdAt = models.DateTimeField(default = datetime.now)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return 'Order #: '+ str(self.order._id)
