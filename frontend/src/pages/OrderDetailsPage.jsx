@@ -99,8 +99,9 @@ export const OrderDetailsPage = () => {
                     <ListGroupItem>
                     <Card.Text style={{textTransform: "uppercase"}}>
                         <h3><strong>Status:</strong></h3>
-                        {order.data.delivered ? <strong style={{color: 'green'}} >ORDER DELIVERED</strong> : <p style={{color: 'red'}} >On its Way!</p>}
-                       <strong>Delivery Date: {(new Date(shipping.shippingDate)).toLocaleDateString()}</strong>
+                        {order.data.paymentCompleted ? <strong style={{color: 'green'}} >PAID</strong> : <strong style={{color: 'red'}} >Unpaid</strong>} <br />
+                         {order.data.delivered ? <strong style={{color: 'green'}} >ORDER DELIVERED</strong> :<> <strong style={{color: 'red'}} >On its Way!</strong> <br />
+                       <strong>Delivery Date: {(new Date(shipping.shippingDate)).toLocaleDateString()}</strong> </>}
 
 
                     </Card.Text>
