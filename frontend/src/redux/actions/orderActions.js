@@ -41,3 +41,35 @@ export const orderCall = (order) => async (dispatch, getState) => {
     })   
     }   
 }
+
+export const orderDetailsCall = (id) => async (dispatch, getState) => {
+
+    try {
+        dispatch({
+            type: ORDER_DETAILS_START
+        })
+
+        // getting token from redux state of logged in user
+        const {
+            login: {userToken} 
+        } = getState()
+
+        // headers with Bearer Token
+        const headers = {'Content-Type': 'application/json',
+                        Authorization: `Bearer ${userToken.access}`}
+
+        const res = await axios.get(`/api/orders/${id}/`,
+        {headers: headers}
+        )
+        dispatch({
+            type: ORDER_DETAILS_SUCCESS,
+            payload: res.data
+        })
+
+    } catch (err) {
+        dispatch({
+        type: ORDER_DETAILS_ERROR,
+        payload: err, 
+    })   
+    }   
+}

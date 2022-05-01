@@ -4,7 +4,9 @@ export const ADD_ORDER_ERROR = 'ADD_ORDER_ERROR'
 
 export const ORDER_RESET = 'ORDER_RESET' 
 
-
+export const ORDER_DETAILS_START = 'ORDER_DETAILS_START'
+export const ORDER_DETAILS_SUCCESS = 'ORDER_DETAILS_SUCCESS'
+export const ORDER_DETAILS_FAIL = 'ORDER_DETAILS_FAIL'
 
 
 
@@ -29,6 +31,31 @@ export const orderReducer = (state={}, action) => {
 
         case ORDER_RESET:
             return { }
+        default:
+            return state
+    }
+}
+
+
+export const orderDetailsReducer = (state={loading:true, orderProds:[], shippingAddress: {}}, action) => {
+    switch(action.type) {
+        case ORDER_DETAILS_START:
+            return {
+                ...state,
+                loading:true,
+            }
+        case ORDER_DETAILS_SUCCESS:
+            return {
+                loading: false,
+                order: action.payload,
+
+            }
+        case ORDER_DETAILS_ERROR:
+            return {
+                loading:false,
+                err: action.payload,
+            }
+
         default:
             return state
     }
