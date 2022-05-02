@@ -31,6 +31,7 @@ def get_user_products(request):
 
 # GET PRODUCT DETAILS
 @api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
 def delete_product(request, pk):
     product = Product.objects.get(_id=pk)
     product.delete()
