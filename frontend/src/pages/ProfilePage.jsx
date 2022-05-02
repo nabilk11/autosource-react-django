@@ -93,7 +93,7 @@ const handleUpdate = (e) => {
                   </thead>
                   <tbody>
                     {orders.map((o)=> (
-                      <tr>
+                      <tr key={o._id} >
                         <td>{o._id}</td>
                         <td>{(new Date(o.createdAt)).toLocaleDateString()}</td>
                         <td>${o.totalPrice}</td>
