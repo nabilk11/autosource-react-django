@@ -23,7 +23,11 @@ export const ProductList = ({ user, userToken }) => {
 },[user])
 
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
+    const headers = {'Content-Type': 'application/json',
+                        Authorization: `Bearer ${userToken.access}`}
+    const res = await axios.delete(`/api/products/delete/${id}`, {headers: headers})
+    window.location.reload()
 
   }
   const handleCreate = (id) => {
@@ -35,23 +39,35 @@ export const ProductList = ({ user, userToken }) => {
       
         
         {products ? <Row>
-          <ul>
+          <Table responsive >
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Size</th>
+                      <th>Price</th>
+                      <th></th>
+                      <th></th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
 
             {products.map(s => (
-              
+              <tr key={s._id} >
+              <td><Link to={`/product/${s._id}`}> <strong>{s.name}</strong></Link></td>
+              <td>{s.size}</td>
+              <td>${s.price}</td>
+              <td></td>
+              <td>
+              <Button onClick={()=> handleDelete(s._id)} className='btn-sm' >Delete</Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
 
-              
-              
-                    <li key={s._id} >
-                    <Link to={`/products/${s._id}`}> <strong>{s.name}</strong></Link> <span> | Size: {s.size} </span>
-                    <span> | ${s.price}</span>
-                    </li>
-                  
-                    
-            ))}
-            </ul>
+        </Table>
         </Row> 
-        : <Alert>😥  😥  😥  No Products 😥  😥  😥 </Alert>}
+        : <Alert>No Products</Alert>}
 
   <Card>
         <Card.Body>
