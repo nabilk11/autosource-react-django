@@ -19,6 +19,14 @@ class GetAllProducts(APIView):
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
+# Get All User Products
+@api_view(['GET'])
+def get_user_products(request):
+    user = request.user
+    products = Product.objects.get(user=user)
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
 
 # GET PRODUCT DETAILS
 @api_view(['GET'])
