@@ -1,23 +1,26 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Container, Button, Card, Col, Row, Image, Form, Alert, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Container, Table, Button, Card, Col, Row, Image, Form, Alert, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { allProducts } from '../redux/actions/prodActions'
+import { useDispatch, useSelector } from 'react-redux';
 
-export const ProductList = () => {
+export const ProductList = ({ user, userToken }) => {
 
-
-  const dispatch = useDispatch()
-  // 
-  const payload = useSelector(state => state.allProducts)
-  const { products, err, loading } = payload
+  const [products, setProducts] = useState()
 
   useEffect(()=> {
-    // const fetchProducts = async () => {
-    // const res = await axios.get('/api/products/')
-    dispatch(allProducts())
-    // fetchProducts()
-  },[dispatch])
+    const fetchProducts = async () => {
+      const headers = {'Content-Type': 'application/json',
+                        Authorization: `Bearer ${userToken.access}`}
+    const res = await axios.get('/api/products/user/', {headers: headers} 
+    )
+    console.log(res)
+    setProducts(res.data)
+
+  }
+  fetchProducts()
+},[user])
 
 
   const handleDelete = (id) => {
@@ -27,22 +30,25 @@ export const ProductList = () => {
   return (
     <Container>
 
-        {loading ? <Image src={"/images/loading.webp"} />
-        : products ? <Row>
+        
+        {products ? <Row>
+          <ul>
 
             {products.map(s => (
-              <Table>
+              
 
               
-                  <ListGroup key={s._id} sm={12} md={6} lg={4} >
-                    <ListGroupItem>
-
-                    </ListGroupItem>
-                  </ListGroup>
-                  </Table>  
+              
+                    <li key={s._id} >
+                    <Link to={`/products/${s._id}`}> <strong>{s.name}</strong></Link> <span> | Size: {s.size} </span>
+                    <span> | ${s.price}</span>
+                    </li>
+                  
+                    
             ))}
+            </ul>
         </Row> 
-        : <Alert>😥  😥  😥  {err.message} 😥  😥  😥 </Alert>}
+        : <Alert>😥  😥  😥  No Products 😥  😥  😥 </Alert>}
 
 
 

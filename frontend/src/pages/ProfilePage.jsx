@@ -5,6 +5,7 @@ import { useDispatch, useSelector  } from 'react-redux';
 import { detailsCall, updateCall } from '../redux/actions/userActions';
 import { LinkContainer } from 'react-router-bootstrap';
 import { orderListCall } from '../redux/actions/orderActions';
+import { ProductList } from '../components/ProductList';
 
 
 export const ProfilePage = () => {
@@ -65,14 +66,19 @@ const handleUpdate = (e) => {
     <Container>
       <Row>
       <Card>
-                <h1><strong>{name}'s Profile</strong></h1>
+                <h1><strong>{user.name}'s Profile</strong></h1>
                 <Card.Text>
-                  <p><strong>Email: {email}</strong></p>
+                  <p><strong>Email: {user.email}</strong></p>
                 </Card.Text>
                 </Card>
       </Row>
       <Row>
       <h1><strong>Sneaker News</strong></h1>
+
+      </Row>
+      <Row>
+      <h1><strong>Current Products Listed</strong></h1>
+      <ProductList userToken={userToken} user={user} />
 
       </Row>
        <Row>

@@ -21,9 +21,10 @@ class GetAllProducts(APIView):
 
 # Get All User Products
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get_user_products(request):
     user = request.user
-    products = Product.objects.get(user=user)
+    products = user.product_set.all()
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
