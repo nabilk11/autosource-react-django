@@ -27,6 +27,7 @@ export const ProductList = ({ user, userToken }) => {
     const headers = {'Content-Type': 'application/json',
                         Authorization: `Bearer ${userToken.access}`}
     const res = await axios.delete(`/api/products/delete/${id}`, {headers: headers})
+    alert(res.data)
     window.location.reload()
 
   }
