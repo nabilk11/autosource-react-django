@@ -95,7 +95,7 @@ class OrderSerializer(serializers.ModelSerializer):
         serializer = UserSerializer(user, many=False)
         return serializer.data
 
-#Shipping Serializer
+#Payment Serializer
 class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = PaymentInfo

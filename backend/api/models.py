@@ -112,12 +112,12 @@ class ShippingInfo(models.Model):
 class PaymentInfo(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE, blank=True)
     ccNum = models.CharField(max_length=17, null=True, blank=True)
-    exp = models.DateField(null=True, blank=True)
+    exp = models.CharField(max_length=10, null=True, blank=True)
     sec = models.CharField(max_length=5, null=True, blank=True)
     paymentType = models.CharField(max_length=55, null=True, blank=True)
-    ppUser = models.CharField(max_length=55, null=True, blank=True)
-    ppPass = models.CharField(max_length=55, null=True, blank=True)
-    createdAt = models.DateTimeField(default = datetime.date.today)
+    ppUser = models.CharField(max_length=55, null=True, blank=True, default='none')
+    ppPass = models.CharField(max_length=55, null=True, blank=True, default='none')
+    createdAt = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):

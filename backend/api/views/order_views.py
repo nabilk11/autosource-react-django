@@ -1,9 +1,8 @@
-from backend.api.models import PaymentInfo
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from api.models import Product, Category, OrderedProducts, Order, ShippingInfo
+from api.models import Product, Category, OrderedProducts, Order, ShippingInfo, PaymentInfo
 from api.serializers import *
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
@@ -98,7 +97,7 @@ def order_paid(request, pk):
     data = request.data
     if request.method == 'PUT':
         order.paymentCompleted = True
-        order.paymentTime = datetime.now()
+        order.paymentTime = datetime.date.today()
         order.save()
         return Response('Payment Completed!')
     if request.method == 'POST':
@@ -109,7 +108,6 @@ def order_paid(request, pk):
             sec = data['sec'],
             ppUser = data['ppUser'],
             ppPass = data['ppPass'],
-            user = user,
         )
         serializer = PaymentSerializer(payment, many=False)
         return Response(serializer.data)
