@@ -10,5 +10,6 @@ urlpatterns = [
     path('user/', product_views.get_user_products, name="user_products"),
     # this path must be string id
     path('<str:pk>/', product_views.product_details, name="product_details"),
+    path('delete/<str:pk>/', product_views.delete_product, name="product_delete"),
 
 ]

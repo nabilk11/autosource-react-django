@@ -30,9 +30,18 @@ def get_user_products(request):
 
 
 # GET PRODUCT DETAILS
+@api_view(['DELETE'])
+def delete_product(request, pk):
+    product = Product.objects.get(_id=pk)
+    product.delete()
+    return Response('Product Deleted!')
+
+
+# GET PRODUCT DETAILS
 @api_view(['GET'])
 def product_details(request, pk):
     product = Product.objects.get(_id=pk)
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
+
 
