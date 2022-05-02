@@ -11,6 +11,14 @@ export const OrderDetailsPage = () => {
     const dispatch = useDispatch()
     const orderId = useParams().id
 
+    const [ccNum, setCcNum] = useState('')
+    const [exp, setExp] = useState('')
+    const [sec, setSec] = useState('')
+    const [ppUser, setPpUser] = useState('')
+    const [ppPass, setPpPass] = useState('')
+    
+
+
     const [shipping, setShipping] = useState({})
 
    
@@ -18,31 +26,56 @@ export const OrderDetailsPage = () => {
     const orderDetails = useSelector(state => state.orderDetails)
     const { order, err, loading } = orderDetails
 
-     // Calculations
-    
-    // if (order) {
-    //     order.subtotal = order.cartProds.reduce((x, y) => x + y.price * y.stock, 0).toFixed(2)
-
-    // }
     
 
     useEffect(() => {
-       const fetchShipping = async (id) => {
-           const res = await axios.get('/api/orders/shipping/'+id)
-           setShipping(res.data)
-       }
        
-       dispatch(orderDetailsCall(orderId))
-       fetchShipping(orderId)
+       
+    console.log('hello')
+    dispatch(orderDetailsCall(orderId))
+
+    const fetchShipping = async (id) => {
+        const res = await axios.get('/api/orders/shipping/'+id)
+        setShipping(res.data)
+    }
+    fetchShipping(orderId)
+        
+           
+       
+        
+       
+       
        
         
     }, [orderId])
 
+    const handlePayment = async (e) => {
+        e.preventDefault()
+        const payment = {
+            ccNum: ccNum,
+            exp: exp,
+            sec: sec,
+            ppUser: ppUser,
+            ppPass: ppPass,
+        }
+        try {
+        const resPost = await axios.post(`/api/orders/${orderId}/payment/`, payment)
+        if (resPost.status == 200) {
+        const resPut = await axios.put(`/api/orders/${orderId}/payment/`)
+        alert(resPut.data)
+        }
+        window.location.reload()
+            
+        } catch (err) {
+            console.log(err)
+            
+        }
 
+    }
 
   return (
     <Container>
-        <Row>
+        {order ? <Row>
             
             <Col md={8} >
             <h1>Order Details</h1>
@@ -93,7 +126,7 @@ export const OrderDetailsPage = () => {
                 </Card>}
             </Col>
             <Col md={4} >
-            {(shipping && order) && <Card>
+            <Card>
             <h2>Deliver Info</h2>
                 <ListGroup>
                     <ListGroupItem>
@@ -122,10 +155,57 @@ export const OrderDetailsPage = () => {
 
 
                 </ListGroup>
+            </Card>
+            {!order.data.paymentCompleted && <Card>
+                <Card.Text>
+                    <h3><strong>Make Your Payment Now!</strong></h3>
+                </Card.Text>
+               {order.data.paymentType === "paypal" && <Form onSubmit={handlePayment} >
+                   <h3>Enter Paypal Login</h3>
+                    <Form.Group>
+                        <Form.Control type='name' placeholder='Enter Paypal Username' onChange={(e)=> setPpUser(e.target.value)} >
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Control type='password' placeholder='Enter Paypal Password' onChange={(e)=> setPpPass(e.target.value)} >
+                        </Form.Control>
+                    </Form.Group>
+                    <Button type='submit' >Purchase!</Button>
+                </Form>}
+               {order.data.paymentType === "credit" && <Form onSubmit={handlePayment} >
+               <h3>Enter Card Info</h3> <small className='text-muted' >CC# | Expiration | Security</small>
+                    <Form.Group>
+                        <Form.Control type='name' placeholder='Enter Card Number' onChange={(e)=> setCcNum(e.target.value)} >
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Control type='text' placeholder='ex: mm/yy' onChange={(e)=> setExp(e.target.value)} >
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Control type='text' placeholder='3/4 Digit Security Code' onChange={(e)=> setSec(e.target.value)} >
+                        </Form.Control>
+                    </Form.Group>
+                    <Button type='submit' >Purchase!</Button>
+                </Form>}
+                {order.data.paymentType === "apple" && <Form onSubmit={handlePayment} >
+                   <h3>Enter Apply ID & Password</h3>
+                    <Form.Group>
+                        <Form.Control type='name' placeholder='Enter Paypal Username' onChange={(e)=> setPpUser(e.target.value)} >
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Control type='password' placeholder='Enter Paypal Password' onChange={(e)=> setPpPass(e.target.value)} >
+                        </Form.Control>
+                    </Form.Group>
+                    <Button type='submit' >Purchase!</Button>
+                </Form>}
+                
             </Card>}
             
             </Col>
         </Row>
+        : <h1>No Order</h1>}
     </Container>
   )
 }
