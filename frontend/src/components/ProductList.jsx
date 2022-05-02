@@ -26,10 +26,13 @@ export const ProductList = ({ user, userToken }) => {
   const handleDelete = (id) => {
 
   }
+  const handleCreate = (id) => {
+
+  }
 
   return (
     <Container>
-
+      
         
         {products ? <Row>
           <ul>
@@ -50,7 +53,13 @@ export const ProductList = ({ user, userToken }) => {
         </Row> 
         : <Alert>😥  😥  😥  No Products 😥  😥  😥 </Alert>}
 
-
+  <Card>
+        <Card.Body>
+        <Button className='btn-sm' onClick={handleCreate} >
+          List New Product
+        </Button>
+        </Card.Body>
+        </Card>
 
     </Container>
   )

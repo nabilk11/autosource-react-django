@@ -13,7 +13,7 @@ function Product({s}) {
         <Card className='my-3 py-3' variant='fluid' >
             <Link to={`/product/${s._id}`} style={{textDecoration: "none", color: 'inherit'}} >
                 <Card.Title ><strong>{s.name}</strong><br />
-                    <small className='text-muted' >{s.category}</small>
+                    <small className='text-muted' >SIZE: {s.size}</small>
                 </Card.Title>
                 <Card.Img  src={s.images} alt="" />
             </Link>

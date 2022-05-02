@@ -123,7 +123,7 @@ const handleUpdate = (e) => {
                 {err && <Alert variant='danger'>{err.message}</Alert>} 
         {/* {error && <Alert variant='danger'>{error}</Alert>} */}
         <Form onSubmit={handleUpdate} >
-            <Col md={6} >
+            <Col className='text-right' md={6} >
             <Row className='mb-3' >
             <Form.Label htmlFor='name' >Name</Form.Label>
             <Form.Control type='name' placeholder={name} onChange={(e)=> setName(e.target.value)}  >
