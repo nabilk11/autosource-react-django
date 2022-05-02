@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Form, Container, Alert, Button, Row, Card, Col  } from 'react-bootstrap';
+import { Form, Container, Alert, Button, Row, Card, Col, Table  } from 'react-bootstrap';
 import { useDispatch, useSelector  } from 'react-redux';
 import { detailsCall, updateCall } from '../redux/actions/userActions';
+import { LinkContainer } from 'react-router-bootstrap';
+import { orderListCall } from '../redux/actions/orderActions';
 
 
 export const ProfilePage = () => {
@@ -23,6 +25,9 @@ const { userToken } = login
 const userUpdate = useSelector(state => state.userUpdate)
 const { message } = userUpdate
 
+const orderList = useSelector(state => state.orderList)
+const { orders } = orderList
+
 // useNavigate
 const navigate = useNavigate()
 
@@ -33,6 +38,7 @@ useEffect(() => {
             dispatch(detailsCall('profile'))
             setName(user.name)
             setEmail(user.email)
+            dispatch(orderListCall())
         
     }
 
@@ -57,22 +63,57 @@ const handleUpdate = (e) => {
 
   return (
     <Container>
-        <Col>
-            <Row>
-                <Card>
-                <h1>Profile</h1>
+      <Row>
+      <Card>
+                <h1><strong>{name}'s Profile</strong></h1>
+                <Card.Text>
+                  <p><strong>Email: {email}</strong></p>
+                </Card.Text>
+                </Card>
+      </Row>
+      <Row>
+      <h1><strong>Sneaker News</strong></h1>
 
-                </Card>
-            </Row>
-            <Row>
-                <Card>
-                <h1>Orders</h1>
+      </Row>
+       <Row>
+
+            <Col md={9} >
+                {orders && <Card>
+                <h1><strong>All Orders</strong></h1>
+                <Table responsive >
+                  <thead>
+                    <tr>
+                      <th>Order #</th>
+                      <th>Date</th>
+                      <th>Total</th>
+                      <th>Paid</th>
+                      <th>Delivered</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {orders.map((o)=> (
+                      <tr>
+                        <td>{o._id}</td>
+                        <td>{(new Date(o.createdAt)).toLocaleDateString()}</td>
+                        <td>${o.totalPrice}</td>
+                        <td>{o.paymentCompleted ? 'Yes' : 'No'}</td>
+                        <td>{o.delivered ? 'Yes' : 'No'}</td>
+                        <td>
+                          <Link to={`/order/${o._id}`} >View</Link>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                  
+                </Table>
+
                     
-                </Card>
-            </Row>
-            <Row>
+                </Card>}
+            </Col>
+            <Col md={3} style={{alignItems: "right"}}>
                 <Card>
-                <h1>Edit Profile</h1>
+                <h1>Edit Info</h1>
                 {err && <Alert variant='danger'>{err.message}</Alert>} 
         {/* {error && <Alert variant='danger'>{error}</Alert>} */}
         <Form onSubmit={handleUpdate} >
@@ -97,19 +138,21 @@ const handleUpdate = (e) => {
             <Form.Control type='password' ref={passwordConfirm} required placeholder='Password' >
             </Form.Control>
             </Row> */}
-          </Col>
-          <Button type='submit' >
+            <Row>
+            <Button type='submit' >
             Update
           </Button>
+
+            </Row>
+          </Col>
+          
         </Form>
                     
                 </Card>
-            </Row>
-        </Col>
+            </Col>
+       
 
-        <Col>
-
-        </Col>
+        </Row>
 
     </Container>
   )
