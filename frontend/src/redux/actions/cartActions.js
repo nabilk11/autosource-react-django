@@ -2,7 +2,7 @@ import { CART_ERROR,
     ADD_TO_CART, 
     REMOVE_FROM_CART, ADD_SHIPPING, ADD_PAYMENT } from "../reducers/cartReducer";
 import axios from 'axios';
-import { Action } from "history";
+
 
 export const addToCart = (id, stock) => async (dispatch, getState) => {
     const res = await axios.get('/api/products/'+id)

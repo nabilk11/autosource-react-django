@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Product, ShippingInfo, Order, OrderedProducts
+from .models import Category, PaymentInfo, Product, ShippingInfo, Order, OrderedProducts
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -71,7 +71,7 @@ class OrderedProductSerializer(serializers.ModelSerializer):
 
 #Order Serializer
 class OrderSerializer(serializers.ModelSerializer):
-    orders = serializers.SerializerMethodField(read_only=True)
+    orderProducts = serializers.SerializerMethodField(read_only=True)
     shipping = serializers.SerializerMethodField(read_only=True)
     user = serializers.SerializerMethodField(read_only=True)
     
@@ -79,19 +79,24 @@ class OrderSerializer(serializers.ModelSerializer):
         model = Order
         fields = '__all__'
 
-    def get_orders(self, order):
+    def get_orderProducts(self, order):
         items = order.orderedproducts_set.all()
         serializer = OrderedProductSerializer(items, many=True)
         return serializer.data
 
-    def get_shipping(self, obj):
+    def get_shipping(self, order):
         try:
-            address = ShippingInfoSerializer(obj.shipping, many=False)
-        except: address = False
-        return address
+            shipping = ShippingInfoSerializer(order['shipping'], many=False).data
+        except: shipping = False
+        return shipping
 
-    def get_user(self, obj):
-        user = obj.user
+    def get_user(self, order):
+        user = order.user
         serializer = UserSerializer(user, many=False)
         return serializer.data
 
+#Payment Serializer
+class PaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PaymentInfo
+        fields = '__all__'

@@ -62,7 +62,7 @@ class Order(models.Model):
     paymentTime = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     deliveryTime = models.BooleanField(default=False)
     delivered = models.BooleanField(default=False)
-    createdAt = models.DateTimeField(auto_now_add=False, null=True, blank=True)
+    createdAt = models.DateTimeField(auto_now_add=True, null=False, blank=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     
 
@@ -87,24 +87,46 @@ class OrderedProducts(models.Model):
 # Shipping Information
 class ShippingInfo(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE, blank=True, null=True)
-    shippingCost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    shippingCost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0)
     address = models.CharField(max_length=155, null=True, blank=True)
     city = models.CharField(max_length=155, null=True, blank=True)
     state = models.CharField(max_length=155, null=True, blank=True)
     zipCode = models.CharField(max_length=10, null=True, blank=True)
-    createdAt = models.DateTimeField(auto_now_add=True)
-    shippingDate = models.DateField(null=True, blank=True)
+    createdAt = models.DateTimeField(default = datetime.date.today)
+    shippingDate = models.DateTimeField()
 
     def __str__(self):
-        return self.order
+        return 'Order #: '+ str(self.order._id)
 
     class Meta:
-        ordering = ['shippingDate']
+        ordering = ['createdAt']
 
 # standard 3 days shipping
     def save(self, *args, **kwargs):
         if self.shippingDate is None:
-            self.shippingDate = self.createdAt.date() + datetime.timedelta(days=3)
+            self.shippingDate = self.createdAt + datetime.timedelta(days=3)
         super(ShippingInfo, self).save(*args, **kwargs)   
 
 
+# Payment Model
+class PaymentInfo(models.Model):
+    order = models.OneToOneField(Order, on_delete=models.CASCADE, blank=True)
+    ccNum = models.CharField(max_length=17, null=True, blank=True)
+    exp = models.CharField(max_length=10, null=True, blank=True)
+    sec = models.CharField(max_length=5, null=True, blank=True)
+    paymentType = models.CharField(max_length=55, null=True, blank=True)
+    ppUser = models.CharField(max_length=55, null=True, blank=True, default='none')
+    ppPass = models.CharField(max_length=55, null=True, blank=True, default='none')
+    createdAt = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return 'Order #: '+ str(self.order._id)
+
+    class Meta:
+        ordering = ['createdAt']
+
+    def save(self, *args, **kwargs):
+        if self.paymentType is None:
+            self.paymentType = self.order.paymentType
+        super(PaymentInfo, self).save(*args, **kwargs)

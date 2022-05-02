@@ -6,6 +6,7 @@ import {
 REG_ERROR, REG_START, REG_SUCCESS, DETAILS_ERROR, DETAILS_START, DETAILS_SUCCESS, UPDATE_ERROR, UPDATE_START, UPDATE_SUCCESS } from "../reducers/userReducer";
 
 import axios from 'axios';
+import { USER_ORDER_RESET } from "../reducers/orderReducer";
 
 
 
@@ -45,6 +46,9 @@ export const logout = () => (dispatch) => {
     window.location.reload()
     dispatch({
         type: LOGOUT
+    })
+    dispatch({
+        type: USER_ORDER_RESET
     })
 }
 
@@ -132,7 +136,7 @@ export const updateCall = (user) => async (dispatch, getState) => {
         const headers = {'Content-Type': 'application/json',
                         Authorization: `Bearer ${userToken.access}`}
 
-        const res = await axios.get(`/api/users/profile/update/`,
+        const res = await axios.put(`/api/users/profile/update/`, user,
         {headers: headers}
         )
         dispatch({

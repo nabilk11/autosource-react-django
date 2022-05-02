@@ -9,6 +9,8 @@ export const ADD_SHIPPING = 'ADD_SHIPPING'
 // Add Payment Type
 export const ADD_PAYMENT = 'ADD_PAYMENT'
 
+export const EMPTY_CART = 'EMPTY_CART'
+
 
 export const cartReducer = (state = { cartProds:[], shippingAddress : { } }, action) => {
     switch (action.type) {
@@ -41,6 +43,11 @@ export const cartReducer = (state = { cartProds:[], shippingAddress : { } }, act
             return{
                 ...state,
                 paymentType: action.payload 
+            }
+        case EMPTY_CART:
+            return {
+                ...state,
+                cartProds: [ ],
             }
         default:
             return state
