@@ -38,8 +38,9 @@ export const ProductList = ({ user, userToken }) => {
     Authorization: `Bearer ${userToken.access}`}
     const res = await axios.post('/api/products/create/',{}, {headers: headers}) 
     navigate(`/product/${res.data._id}/edit`)
-
-
+  }
+  const editRedirect = async (id) => {
+    navigate(`/product/${id}/edit`)
   }
 
   return (
@@ -53,6 +54,7 @@ export const ProductList = ({ user, userToken }) => {
                       <th>Name</th>
                       <th>Size</th>
                       <th>Price</th>
+                      <th></th>
                       <th></th>
                       <th></th>
                       
@@ -69,6 +71,7 @@ export const ProductList = ({ user, userToken }) => {
               <td>
               <Button onClick={()=> handleDelete(s._id)} className='btn-sm' >Delete</Button>
               </td>
+              <td><Button className='btn-sm' onClick={()=> editRedirect(s._id)} >Edit</Button></td>
             </tr>
           ))}
         </tbody>
