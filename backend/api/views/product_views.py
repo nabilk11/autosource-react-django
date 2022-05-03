@@ -48,20 +48,18 @@ def product_details(request, pk):
 
 # ADD PRODUCT
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def product_create(request):
     user=request.user
-    data=request.data
     product = Product.objects.create(
         user=user,
-        name=data['name'],
-        price=data['price'],
-        color=data['color'],
-        category=data['category'],
-        description=data['description'],
-        count=data['count'],
-        images=data['images'],
-        year=data['year'],
-        size=data['size'],
+        name='New Product',
+        price=0,
+        color='Product Color',
+        description='Description',
+        count=1,
+        year=2022,
+        size='0',
         )
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
