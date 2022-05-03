@@ -28,10 +28,11 @@ export const ProductList = ({ user, userToken }) => {
   const handleDelete = async (id) => {
     const headers = {'Content-Type': 'application/json',
                         Authorization: `Bearer ${userToken.access}`}
-    const res = await axios.delete(`/api/products/delete/${id}`, {headers: headers})
-    alert(res.data)
-    window.location.reload()
-
+    if (window.confirm('Are you sure you want to remove this listing?')) {
+      const res = await axios.delete(`/api/products/delete/${id}`, {headers: headers})
+      alert(res.data)
+      window.location.reload()
+    }
   }
   const handleCreate = async () => {
     const headers = {'Content-Type': 'application/json',
@@ -39,6 +40,7 @@ export const ProductList = ({ user, userToken }) => {
     const res = await axios.post('/api/products/create/',{}, {headers: headers}) 
     navigate(`/product/${res.data._id}/edit`)
   }
+
   const editRedirect = async (id) => {
     navigate(`/product/${id}/edit`)
   }

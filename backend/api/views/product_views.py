@@ -70,17 +70,17 @@ def product_create(request):
 def product_update(request, pk):
     data=request.data
     product = Product.objects.get(_id=pk)
+    pcategory = Category.objects.get(id=data['category'])
 
-
-    product.name=data['name'],
-    product.price=data['price'],
-    product.color=data['color'],
-    product.category=data['category'],
-    product.description=data['description'],
-    product.count=data['count'],
-    product.images=data['images'],
-    product.year=data['year'],
-    product.size=data['size'],
+    product.name=data['name']
+    product.price=data['price']
+    product.color=data['color']
+    product.category=pcategory
+    product.description=data['description']
+    product.count=data['count']
+    product.images=data['images']
+    product.year=data['year']
+    product.size=data['size']
     
     product.save()
     serializer = ProductSerializer(product, many=False)

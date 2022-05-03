@@ -14,6 +14,7 @@ import { ShippingPage } from './pages/ShippingPage';
 import { PaymentPage } from './pages/PaymentPage';
 import { OrderPage } from './pages/OrderPage';
 import { OrderDetailsPage } from './pages/OrderDetailsPage';
+import { ProductFormPage } from './pages/ProductFormPage';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route path='/profile' element={<ProfilePage />}  />
         <Route path='/products' element={<AllProducts />}  />
         <Route path='/product/:id' element={<ProductPage />}  />
+        <Route path='/product/:id/edit' element={<ProductFormPage />}  />
         <Route path='/cart/:id' element={<CartPage />}  />
         <Route path='/cart' element={<CartPage />}  />
         <Route path='/shipping' element={<ShippingPage />}  />
