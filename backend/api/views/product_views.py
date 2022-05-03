@@ -46,3 +46,47 @@ def product_details(request, pk):
     return Response(serializer.data)
 
 
+# ADD PRODUCT
+@api_view(['POST'])
+def product_create(request):
+    user=request.user
+    data=request.data
+    product = Product.objects.create(
+        user=user,
+        name=data['name'],
+        price=data['price'],
+        color=data['color'],
+        category=data['category'],
+        description=data['description'],
+        count=data['count'],
+        images=data['images'],
+        year=data['year'],
+        size=data['size'],
+        )
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
+
+
+# UPDATE PRODUCT 
+@api_view(['PUT'])
+def product_update(request, pk):
+    data=request.data
+    product = Product.objects.get(_id=pk)
+
+
+    product.name=data['name'],
+    product.price=data['price'],
+    product.color=data['color'],
+    product.category=data['category'],
+    product.description=data['description'],
+    product.count=data['count'],
+    product.images=data['images'],
+    product.year=data['year'],
+    product.size=data['size'],
+    
+    product.save()
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
+
+
+
