@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export const ProductList = ({ user, userToken }) => {
 
+  const navigate = useNavigate()
+
   const [products, setProducts] = useState()
 
   useEffect(()=> {
@@ -31,7 +33,12 @@ export const ProductList = ({ user, userToken }) => {
     window.location.reload()
 
   }
-  const handleCreate = (id) => {
+  const handleCreate = async () => {
+    const headers = {'Content-Type': 'application/json',
+    Authorization: `Bearer ${userToken.access}`}
+    const res = await axios.post('/api/products/create/',{}, {headers: headers}) 
+    navigate(`/product/${res.data._id}/edit`)
+
 
   }
 
