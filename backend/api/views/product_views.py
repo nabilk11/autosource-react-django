@@ -78,7 +78,6 @@ def product_update(request, pk):
     product.category=pcategory
     product.description=data['description']
     product.count=data['count']
-    product.images=data['images']
     product.year=data['year']
     product.size=data['size']
     
@@ -87,4 +86,12 @@ def product_update(request, pk):
     return Response(serializer.data)
 
 
+@api_view(['POST'])
+def product_image(request):
+    data=request.data
+    product_id = data['productId']
+    product=Product.objects.get(_id=product_id)
 
+    product.images = request.FILES.get('images')
+    product.save()
+    return Response('Image Uploaded')

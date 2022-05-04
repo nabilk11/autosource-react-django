@@ -10,6 +10,8 @@ import axios from 'axios'
 
 export const ProductFormPage = () => {
 
+  const navigate = useNavigate()
+
   // redux
   const login = useSelector(state => state.login)
   const { userToken } = login
@@ -26,15 +28,35 @@ export const ProductFormPage = () => {
   const [year, setYear] = useState(2022)
   const [size, setSize] = useState('')
 
-
+  
   const handleUpdate = async (e) => {
     e.preventDefault()
     const headers = {'Content-Type': 'application/json',
                     Authorization: `Bearer ${userToken.access}`}
     
     const res = await axios.put(`/api/products/update/${productId}/`, {
-      name:name, price:price, category:category, color:color,description:description,images:images,count:count,year:year,size:size, 
+      name:name, price:price, category:category, color:color,description:description,count:count,year:year,size:size, 
     }, {headers:headers})
+    navigate(`/product/${productId}`)
+
+
+  }
+
+  const uploadImage = async (e) => {
+    const file = e.target.files[0] 
+    const formData = new FormData()
+    formData.append('images', file)
+    formData.append('productId', productId)
+
+    try {
+      const headers = {'Content-Type': 'multipart/form-data'}
+      const res = await axios.post('/api/products/upload/', formData, {headers:headers})
+
+      
+    } catch (error) {
+      
+    }
+
 
 
   }
@@ -98,7 +120,7 @@ export const ProductFormPage = () => {
             <Row>
               <Form.Group controlId="formFile" className="mb-3">
                 <Form.Label>Image</Form.Label>
-                <Form.Control type="file" onChange={(e)=> setImages(e.target.value)} />
+                <Form.Control type="file" onChange={uploadImage} />
               </Form.Group>
             </Row>
             <Row>
