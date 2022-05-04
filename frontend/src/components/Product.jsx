@@ -19,9 +19,9 @@ function Product({s}) {
             </Link>
                 <Card.Body>
                     <p className='text-muted' >{s.year}</p>
-                    <Card.Text as={"div"} height={"80px"}>
+                    {/* <Card.Text as={"div"} height={"80px"}>
                         <p>{s.description}</p>
-                    </Card.Text>
+                    </Card.Text> */}
                     <Card.Text as={"h4"} >
                        <p>Price: <strong>${s.price}</strong></p>
                     </Card.Text>

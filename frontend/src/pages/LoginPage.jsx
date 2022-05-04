@@ -53,10 +53,11 @@ const handleLogin = (e) => {
             </Form.Control>
             </Row>
           </Col>
+          <div>
           <Button type='submit' >
             Login
           </Button>
-          <p className="loginForgot">Forgot Password?</p>
+          </div>
           <p className="loginForgot">Don't Have an Account? <Link to={"/register"} > Register Here</Link></p>
         </Form>
         </Card.Body>

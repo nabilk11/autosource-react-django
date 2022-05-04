@@ -6,6 +6,7 @@ import { detailsCall, updateCall } from '../redux/actions/userActions';
 import { LinkContainer } from 'react-router-bootstrap';
 import { orderListCall } from '../redux/actions/orderActions';
 import { ProductList } from '../components/ProductList';
+import { SneakerNews } from '../components/SneakerNews';
 
 
 export const ProfilePage = () => {
@@ -56,6 +57,7 @@ const handleUpdate = (e) => {
             'email': email,
             'password': password,
 }))
+window.location.reload()
         
   }
 
@@ -65,15 +67,15 @@ const handleUpdate = (e) => {
   return (
     <Container>
       <Row>
-      <Card>
+      <Col>
                 <h1><strong>{user.name}'s Profile</strong></h1>
                 <Card.Text>
                   <p><strong>Email: {user.email}</strong></p>
                 </Card.Text>
-                </Card>
+                </Col>
       </Row>
       <Row>
-      <h1><strong>Sneaker News</strong></h1>
+      <SneakerNews />
 
       </Row>
       <Row>
@@ -118,7 +120,7 @@ const handleUpdate = (e) => {
                 </Card>}
             </Col>
             <Col md={3} style={{alignItems: "right"}}>
-                <Card>
+                
                 <h1>Edit Info</h1>
                 {err && <Alert variant='danger'>{err.message}</Alert>} 
         {/* {error && <Alert variant='danger'>{error}</Alert>} */}
@@ -139,11 +141,6 @@ const handleUpdate = (e) => {
             <Form.Control type='password' placeholder={password} onChange={(e)=> setPassword(e.target.value)}  >
             </Form.Control>
             </Row>
-            {/* <Row>
-            <Form.Label htmlFor='passwordConfirm' >Confirm Password</Form.Label>
-            <Form.Control type='password' ref={passwordConfirm} required placeholder='Password' >
-            </Form.Control>
-            </Row> */}
             <Row>
             <Button type='submit' >
             Update
@@ -154,7 +151,7 @@ const handleUpdate = (e) => {
           
         </Form>
                     
-                </Card>
+                
             </Col>
        
 
