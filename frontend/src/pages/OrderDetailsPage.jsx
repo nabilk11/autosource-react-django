@@ -127,7 +127,7 @@ export const OrderDetailsPage = () => {
             </Col>
             <Col md={4} >
             <Card>
-            <h2>Deliver Info</h2>
+            <h2>Delivery Info</h2>
                 <ListGroup>
                     <ListGroupItem>
                     <Card.Text style={{textTransform: "uppercase"}}>
@@ -145,13 +145,13 @@ export const OrderDetailsPage = () => {
                     </Card.Text>
 
                     </ListGroupItem>
-                    <ListGroupItem>
+                    {shipping.address && <ListGroupItem>
                                 <Card.Text style={{textTransform: "uppercase"}} >
                                    <h3><strong>Shipping Info:</strong></h3>  
                                    {shipping.address} <br />
                                    {shipping.city}, {shipping.state}, {shipping.zipCode}
                                 </Card.Text>
-                            </ListGroupItem>
+                            </ListGroupItem>}
 
 
                 </ListGroup>

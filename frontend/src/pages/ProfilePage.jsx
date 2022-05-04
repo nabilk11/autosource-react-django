@@ -5,6 +5,7 @@ import { useDispatch, useSelector  } from 'react-redux';
 import { detailsCall, updateCall } from '../redux/actions/userActions';
 import { LinkContainer } from 'react-router-bootstrap';
 import { orderListCall } from '../redux/actions/orderActions';
+import { ProductList } from '../components/ProductList';
 
 
 export const ProfilePage = () => {
@@ -65,14 +66,19 @@ const handleUpdate = (e) => {
     <Container>
       <Row>
       <Card>
-                <h1><strong>{name}'s Profile</strong></h1>
+                <h1><strong>{user.name}'s Profile</strong></h1>
                 <Card.Text>
-                  <p><strong>Email: {email}</strong></p>
+                  <p><strong>Email: {user.email}</strong></p>
                 </Card.Text>
                 </Card>
       </Row>
       <Row>
       <h1><strong>Sneaker News</strong></h1>
+
+      </Row>
+      <Row>
+      <h1><strong>Current Products Listed</strong></h1>
+      <ProductList userToken={userToken} user={user} />
 
       </Row>
        <Row>
@@ -117,7 +123,7 @@ const handleUpdate = (e) => {
                 {err && <Alert variant='danger'>{err.message}</Alert>} 
         {/* {error && <Alert variant='danger'>{error}</Alert>} */}
         <Form onSubmit={handleUpdate} >
-            <Col md={6} >
+            <Col className='text-right' md={6} >
             <Row className='mb-3' >
             <Form.Label htmlFor='name' >Name</Form.Label>
             <Form.Control type='name' placeholder={name} onChange={(e)=> setName(e.target.value)}  >

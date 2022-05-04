@@ -19,6 +19,24 @@ class GetAllProducts(APIView):
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
+# Get All User Products
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_products(request):
+    user = request.user
+    products = user.product_set.all()
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+
+
+# GET PRODUCT DETAILS
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_product(request, pk):
+    product = Product.objects.get(_id=pk)
+    product.delete()
+    return Response('Product Deleted!')
+
 
 # GET PRODUCT DETAILS
 @api_view(['GET'])
@@ -27,3 +45,53 @@ def product_details(request, pk):
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
 
+
+# ADD PRODUCT
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def product_create(request):
+    user=request.user
+    product = Product.objects.create(
+        user=user,
+        name='New Product',
+        price=0,
+        color='Product Color',
+        description='Description',
+        count=1,
+        year=2022,
+        size='0',
+        )
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
+
+
+# UPDATE PRODUCT 
+@api_view(['PUT'])
+def product_update(request, pk):
+    data=request.data
+    product = Product.objects.get(_id=pk)
+    pcategory = Category.objects.get(id=data['category'])
+
+    product.name=data['name']
+    product.price=data['price']
+    product.color=data['color']
+    product.category=pcategory
+    product.description=data['description']
+    product.count=data['count']
+    product.year=data['year']
+    product.size=data['size']
+    
+    product.save()
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def product_image(request):
+    data=request.data
+    product_id = data['productId']
+    product=Product.objects.get(_id=product_id)
+
+    product.images = request.FILES.get('images')
+    product.save()
+    return Response('Image Uploaded')

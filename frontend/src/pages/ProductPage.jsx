@@ -44,6 +44,7 @@ const cartHandler = () => {
                     <h5 className='text-muted'>{product.color}</h5>
                     <p style={{color: "crimson"}} ><strong>{product.year}</strong></p>  
                     <p><strong>{product.description}</strong></p>
+                    <p><strong className='text-muted' >Size {product.size}</strong></p>
                     {product.count > 0 ? <Image width={"100px"} fluid src={"/images/instock.jpeg"} />
                     :<Image width={"100px"} fluid src={"/images/soldout.jpeg"}/>} 
                     {product.count === 1 && <Alert variant='success' >Hurry! Only One Left!</Alert>}

@@ -38,7 +38,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, related_name="category", null=False, blank=False, on_delete=models.CASCADE, default=1)
     description = models.TextField(max_length=255, null=True, blank=True)
     count = models.IntegerField(default=0, blank=True, null=True)
-    images = models.ImageField(upload_to='images/', blank=True, null=True)
+    images = models.ImageField(upload_to='images/', blank=True, null=True, default='/images/blank_shoe.jpeg')
     createdAt = models.DateTimeField(auto_now_add=True)
     year = models.PositiveIntegerField(default=current_year(), validators=[MinValueValidator(1984), multi_year_value])
     size = models.CharField(max_length=22, null=True, blank=True)
