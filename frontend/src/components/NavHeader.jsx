@@ -32,7 +32,10 @@ const handleLogout = () => {
             <LinkContainer to={"/"}>
               <Nav.Link >Home</Nav.Link>
             </LinkContainer>
-                <strong>
+            <LinkContainer to={"/products"} >
+                    <Nav.Link>Products</Nav.Link>
+                  </LinkContainer>
+                {/* <strong>
                   <NavDropdown renderMenuOnMount={true} title="Sneakers" id="basic-nav-dropdown"> 
                   <LinkContainer to={"/jordan"}>
                     <NavDropdown.Item >Air Jordan</NavDropdown.Item>
@@ -50,9 +53,7 @@ const handleLogout = () => {
                     <NavDropdown.Item >Other</NavDropdown.Item>
                   </LinkContainer>
                   <NavDropdown.Divider />
-                  <LinkContainer to={"/products"} >
-                    <NavDropdown.Item>View All Products</NavDropdown.Item>
-                  </LinkContainer>
+                  
                   </NavDropdown>
                 </strong>
                 <NavDropdown renderMenuOnMount={true} title="Apparel" id="basic-nav-dropdown">
@@ -66,7 +67,7 @@ const handleLogout = () => {
                   <LinkContainer to={"/products"} >
                     <NavDropdown.Item>View All Products</NavDropdown.Item>
                   </LinkContainer>
-                </NavDropdown>
+                </NavDropdown> */}
 
                 {userToken ? <><LinkContainer to={"/profile"}>
                     <Nav.Link >Profile</Nav.Link>
@@ -91,9 +92,7 @@ const handleLogout = () => {
                 </Navbar.Collapse>
             </Container>
         </Navbar>
-        <div className="m-3" >
-          <h1 className="heading">SneakerSource | Welcome</h1>
-        </div>
+    
     </header>
   )
 }

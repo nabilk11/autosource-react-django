@@ -82,13 +82,13 @@ export const ProductList = ({ user, userToken }) => {
         </Row> 
         : <Alert>No Products</Alert>}
 
-  <Card>
+  
         <Card.Body>
         <Button className='btn-sm' onClick={handleCreate} >
           List New Product
         </Button>
         </Card.Body>
-        </Card>
+        
 
     </Container>
   )

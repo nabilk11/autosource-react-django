@@ -15,6 +15,7 @@ import { PaymentPage } from './pages/PaymentPage';
 import { OrderPage } from './pages/OrderPage';
 import { OrderDetailsPage } from './pages/OrderDetailsPage';
 import { ProductFormPage } from './pages/ProductFormPage';
+import { ReturnPolicy } from './components/ReturnPolicy';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
         <Route path='/payment' element={<PaymentPage />}  />
         <Route path='/order' element={<OrderPage />}  />
         <Route path='/order/:id' element={<OrderDetailsPage />}  />
+        <Route path='/return' element={<ReturnPolicy/>}  />
       </Routes>
     </Container>
     </main>

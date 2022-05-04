@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 
 
@@ -9,11 +10,11 @@ function Footer() {
             <Container>
                 <Row>
                     <Col >
-                    <div className="footer-links" >
+                    <div className="footer-links" style={{textAlign: 'center'}} >
                         <a style={{marginRight: "1rem"}} href="">Contact Us</a>
                         <a style={{marginRight: "1rem"}} href="">Privacy Policy</a>
                         <a style={{marginRight: "1rem"}} href="">Terms and Conditions</a>
-                        <a style={{marginRight: "1rem"}} href="">Return Policy</a>
+                        <Link to={'/return'} style={{marginRight: "1rem"}} >Return Policy</Link>
                     </div>
                     
                     </Col>

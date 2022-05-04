@@ -23,7 +23,7 @@ function AllProducts() {
 
   return (
     <div >
-        <h2 className='mt-4' >All Products <br />
+        <h2 className='mt-4'>All Products <br />
         <small className='text-muted mb-3'>The very best only at SneakerSource!</small> </h2> <br />
 
         
