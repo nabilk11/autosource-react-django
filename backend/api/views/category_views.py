@@ -28,3 +28,12 @@ def create_category(request):
     )
     serializer = CategorySerializer(new_cat, many=False)
     return Response(serializer.data)
+
+
+# get jordans
+@api_view(['GET'])
+def get_category_prods(request, pk):
+    products = Product.objects.filter(category_id=pk)
+    serializer = ProductSerializer(products, many=True)
+    return Response(serializer.data)
+

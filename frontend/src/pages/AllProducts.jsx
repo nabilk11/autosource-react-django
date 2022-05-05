@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import { Alert, Col, Image, Row,  } from 'react-bootstrap';
+import { Alert, Col, Container, Image, Row,  } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Product from '../components/Product';
 import { allProducts } from '../redux/actions/prodActions'
@@ -22,7 +22,7 @@ function AllProducts() {
 
 
   return (
-    <div >
+    <Container>
         <h2 className='mt-4'>All Products <br />
         <small className='text-muted mb-3'>The very best only at SneakerSource!</small> </h2> <br />
 
@@ -37,7 +37,7 @@ function AllProducts() {
         </Row> 
         : <Alert>😥  😥  😥  {err.message} 😥  😥  😥 </Alert>}
         
-    </div>
+    </Container>
   )
 }
 
