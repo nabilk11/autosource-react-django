@@ -1,27 +1,35 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Image, Alert } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Product from '../components/Product';
+import { useSelector, useDispatch } from 'react-redux';
+import { allCategories } from '../redux/actions/categoryActions';
 
 export const CategoryPage = () => {
 
     const catId = useParams().id
-    const [products, setProducts] = useState([])
+    // const [products, setProducts] = useState([])
+
+    const category = useSelector(state => state.category)
+    const { products, loading, err } = category
+    const dispatch = useDispatch()
 
 
     useEffect(()=> {
-        const fetchCategoryProducts = async () => {
-            const res = await axios.get(`/api/category/${catId}/`)
-            setProducts(res.data)
-            console.log(res.data)
-        }
-        fetchCategoryProducts()
+        // const fetchCategoryProducts = async () => {
+        //     const res = await axios.get(`/api/category/${catId}/`)
+        //     setProducts(res.data)
+        //     console.log(res.data)
+        // }
+        // fetchCategoryProducts()
+        dispatch(allCategories(catId))
     }, [catId])
 
   return (
     <Container>
-       {products.length > 0 ? <>{ products[0].category == 1 ? <><h2 className='mt-4'>All Jordans <br /> 
+      
+       {loading ? <div className='mt-4' style={{textAlign: "center"}} ><Image className='mt-4'  src={"/images/loading.webp"} /></div> : products.length > 0 ? <>{ products[0].category == 1 ? <><h2 className='mt-4'>All Jordans <br /> 
        <small className='text-muted mb-3'>The very best only at SneakerSource!</small> </h2> <br />
        </>
        : products[0].category === 2 ? <><h2 className='mt-4'>All NikeSBs <br /> 
@@ -42,8 +50,8 @@ export const CategoryPage = () => {
        : <><h2 className='mt-4'>All Yeezys <br /> 
        <small className='text-muted mb-3'>The very best only at SneakerSource!</small> </h2> <br />
        </>}
-       </>
-       : <h1>No Current Products in this Category!</h1>}
+       </> : <Alert>No Current Products in this Category!</Alert>}
+        {err && <Alert>{err.message}</Alert>}
         
 
         {products && <Row>
