@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from django.conf import settings
+from . import views
 from django.conf.urls.static import static
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -38,6 +39,7 @@ urlpatterns = [
     path('api/users/', include('api.urls.user_urls')),
     path('api/orders/', include('api.urls.order_urls')),
     path('api/category/', include('api.urls.category_urls')),
+    path('api/contact/', views.contact_us, name='contact_us'),
 
 ]
 
