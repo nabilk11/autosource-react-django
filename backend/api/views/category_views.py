@@ -30,7 +30,7 @@ def create_category(request):
     return Response(serializer.data)
 
 
-# get jordans
+# Get Category products
 @api_view(['GET'])
 def get_category_prods(request, pk):
     products = Product.objects.filter(category_id=pk)

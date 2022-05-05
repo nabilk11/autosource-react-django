@@ -33,41 +33,35 @@ const handleLogout = () => {
               <Nav.Link >Home</Nav.Link>
             </LinkContainer>
             <LinkContainer to={"/products"} >
-                    <Nav.Link>Products</Nav.Link>
+                    <Nav.Link>All Products</Nav.Link>
                   </LinkContainer>
-                {/* <strong>
+                <strong>
                   <NavDropdown renderMenuOnMount={true} title="Sneakers" id="basic-nav-dropdown"> 
-                  <LinkContainer to={"/jordan"}>
+                  <LinkContainer to={"/category/1"}>
                     <NavDropdown.Item >Air Jordan</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to={"/nikesb"}>
+                  <LinkContainer to={"/category/2"}>
                     <NavDropdown.Item >Nike SB</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to={"/yeezy"}>
+                  <LinkContainer to={"/category/4"}>
                     <NavDropdown.Item>Yeezy</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to={"/nike"}>
+                  <LinkContainer to={"/category/3"}>
                     <NavDropdown.Item >Nike</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to={"/other"}>
+                  <LinkContainer to={"/category/5"}>
                     <NavDropdown.Item >Other</NavDropdown.Item>
                   </LinkContainer>
-                  <NavDropdown.Divider />
-                  
                   </NavDropdown>
                 </strong>
                 <NavDropdown renderMenuOnMount={true} title="Apparel" id="basic-nav-dropdown">
-                <LinkContainer to={"/mens"}>
+                <LinkContainer to={"/category/6"}>
                     <NavDropdown.Item >Men's Apparel</NavDropdown.Item>
                   </LinkContainer>
-                <LinkContainer to={"/womens"}>
+                <LinkContainer to={"/category/7"}>
                     <NavDropdown.Item >Women's Apparel</NavDropdown.Item>
                   </LinkContainer>
-                  <NavDropdown.Divider />
-                  <LinkContainer to={"/products"} >
-                    <NavDropdown.Item>View All Products</NavDropdown.Item>
-                  </LinkContainer>
-                </NavDropdown> */}
+                </NavDropdown>
 
                 {userToken ? <><LinkContainer to={"/profile"}>
                     <Nav.Link >Profile</Nav.Link>
