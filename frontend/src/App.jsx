@@ -17,6 +17,7 @@ import { OrderDetailsPage } from './pages/OrderDetailsPage';
 import { ProductFormPage } from './pages/ProductFormPage';
 import { ReturnPolicy } from './components/ReturnPolicy';
 import { CategoryPage } from './pages/CategoryPage';
+import { ContactPage } from './pages/ContactPage';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route path='/order/:id' element={<OrderDetailsPage />}  />
         <Route path='/category/:id' element={<CategoryPage />}  />
         <Route path='/return' element={<ReturnPolicy />}  />
+        <Route path='/contact' element={<ContactPage/>}  />
       </Routes>
     </Container>
     </main>
