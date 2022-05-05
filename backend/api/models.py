@@ -130,3 +130,16 @@ class PaymentInfo(models.Model):
         if self.paymentType is None:
             self.paymentType = self.order.paymentType
         super(PaymentInfo, self).save(*args, **kwargs)
+
+
+class ContactSubmission(models.Model):
+    email = models.EmailField(null=False, blank=False)
+    subject = models.CharField(max_length=155, null=True, blank=True)
+    message = models.TextField(max_length=555, null=False, blank=False)
+    createdAt = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return 'Message From: ' + self.email
+
+    class Meta:
+        ordering = ['createdAt']
