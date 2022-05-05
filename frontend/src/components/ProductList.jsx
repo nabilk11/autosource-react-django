@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Table, Button, Card, Col, Row, Image, Form, Alert, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { allProducts } from '../redux/actions/prodActions'
-import { useDispatch, useSelector } from 'react-redux';
+
 
 export const ProductList = ({ user, userToken }) => {
 
