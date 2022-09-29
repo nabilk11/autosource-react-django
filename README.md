@@ -1,7 +1,7 @@
 # SneakerSource | Django-React Ecommerce Sneaker App
-This is a DJango React PostGreSQL application, that functions as an ecommerce platform for sneakers similar to the vein of a StockX type site. 
+This is a DJango React PostGreSQL application, that functions as an ecommerce platform for sneakers similar to the vein of a StockX type site. Currently still in development!
 
-## Pre-Planning Deliverables
+## Pre-Planning
 
 ### User Stories
 - As a user, I will be able to view the listings of different sneakers on the site.
